@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>home</title>
+    {% endblock %}
+    {% load static %}
+    <script src=" {% static 'js/jquery.js' %} "></script>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/csrf_token.js' %}"></script>
+    <style>
+        #item_foot > span {
+            padding: 15px 5px 0 5px;
+        }
+    </style>
+
+    {% block css %}
+
+    {% endblock %}
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            {% block nav_title %}
+                <a class="navbar-brand" href="{% url 'home' %}">BBS</a>
+            {% endblock %}
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'home' %}">home <span class="sr-only">(current)</span></a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_authenticated %}
+                    <li><a href="/{{ request.user.username }}">{{ request.user.username }}</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">更多 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-toggle="modal" data-target="#set_avatar">修改头像</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#myModal">修改密码</a></li>
+                            <li><a href="{% url 'base' %}">后台管理</a></li>
+                            <li><a href="{% url 'logout' %}">注销</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">后续...</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'register' %}">注册</a></li>
+                    <li><a href="{% url 'login' %}">登录</a></li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">联系方式</h3>
+                    </div>
+                    <div class="panel-body">
+                        手机号：18533538210
+                    </div>
+                    <div class="panel-body">
+                        邮箱：hkwJsxl@gmail.com
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                {% for article in article_queryset %}
+                    <div class="media">
+                        <a href="/{{ article.blog.userinfo.username }}/article/{{ article.pk }}"><h4
+                                class="media-heading">{{ article.title }}</h4></a>
+                        <div class="media-left media-middle">
+                            <a href="/{{ article.blog.userinfo.username }}">
+                                <img class="media-object" src="/media/{{ article.blog.userinfo.avatar }}" alt="用户头像"
+                                     width="80px">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            {{ article.desc|truncatechars:150 }}
+                        </div>
+                        <div id="item_foot">
+                        <span><a
+                                href="/{{ article.blog.userinfo.username }}">{{ article.blog.userinfo.username }}</a></span>
+                            <span>{{ article.create_time|date:'Y-m-d H:i' }}</span>
+                            <span class="glyphicon glyphicon-thumbs-up">{{ article.up_num }}</span>
+                            <span class="glyphicon glyphicon-thumbs-down">{{ article.down_num }}</span>
+                            <span class="glyphicon glyphicon-comment">{{ article.comment_num }}</span>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+            <div class="col-md-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">联系方式</h3>
+                    </div>
+                    <div class="panel-body">
+                        手机号：18533538210
+                    </div>
+                    <div class="panel-body">
+                        邮箱：hkwJsxl@gmail.com
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!-- Large modal         要点击的标签加属性：data-toggle="modal" data-target="#myModal" -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title text-center h3" id="myModalLabel">
+                    更改密码
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <div class="form-group">
+                            <label for="id_username">username:</label>
+                            <input type="text" id="id_username" value="{{ request.user.username }}"
+                                   class="form-control" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_old_password">old_password:</label>
+                            <input type="password" id="id_old_password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_new_password">new_password:</label>
+                            <input type="password" id="id_new_password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_confirm_password">confirm_password:</label>
+                            <input type="password" id="id_confirm_password" class="form-control">
+                        </div>
+                        <span id="id_password_error" style="color: red"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="id_set_password" class="btn btn-primary">
+                    提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="set_avatar" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">×
+                </button>
+                <h4 class="modal-title text-center h3" id="myModalLabel">
+                    更改头像
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <form enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="id_old_img">旧头像:</label>
+                                <img id="id_old_img" src="/media/{{ request.user.avatar }}" alt="旧头像" width="100px"
+                                     disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_file">
+                                    新头像:
+                                    <img id="id_new_img" src="/media/{{ request.user.avatar }}" width="100px" alt="新头像">
+                                </label>
+                                <input type="file" id="id_file" class="form-control" style="display: none">
+                            </div>
+                            <span id="id_avatar_error" style="color: red"></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="id_set_avatar" class="btn btn-primary">
+                    提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // 更改密码
+    $('#id_set_password').click(function () {
+        $.ajax({
+            url: "{% url 'set_password' %}",
+            type: 'post',
+            data: {
+                'old_password': $('#id_old_password').val(),
+                'new_password': $('#id_new_password').val(),
+                'confirm_password': $('#id_confirm_password').val(),
+            },
+            success: function (args) {
+                if (args.code === 2000) {
+                    window.location.href = args.url
+                } else {
+                    $('#id_password_error').text(args.msg)
+                }
+            }
+        })
+    })
+
+    // 更改头像
+    $('#id_file').change(function () {
+        let fileReaderObj = new FileReader;
+        let fileObj = $(this)[0].files[0];
+        fileReaderObj.readAsDataURL(fileObj);
+        fileReaderObj.onload = function () {
+            $('#id_new_img').attr('src', fileReaderObj.result);
+        }
+    })
+    // 提交头像
+    $('#id_set_avatar').click(function () {
+        let formDataObj = new FormData;
+        formDataObj.append('avatar', $('#id_file')[0].files[0])
+        $.ajax({
+            url: "{% url 'set_avatar' %}",
+            type: 'post',
+            contentType: false,
+            processData: false,
+            data: formDataObj,
+            success: function (args) {
+                if (args.code === 2000) {
+                    window.location.href = args.url;
+                } else {
+                    $('#id_avatar_error').text(args.msg);
+                }
+            }
+        })
+    })
+</script>
+
+{% block js %}
+
+{% endblock %}
+
+
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/plugsin.css" />
+    <link rel="stylesheet" href="../plugsin/font-awesome-4.3.0/css/font-awesome.css"/>
+    <style>
+        
+        .time{
+            padding:10px;
+            border:1px solid #ddd;
+            position:absolute;
+            width:150px;
+            left:-190px;
+            box-shadow: 0 2px 8px 2px rgba(0,0,0,0.12);
+        }
+        .record{
+            padding:10px;
+            border:1px solid #ddd;
+            margin:17px;
+            min-height:40px;
+            box-shadow: 0 2px 8px 2px rgba(0,0,0,0.12);
+        }
+        .record .auther{
+            text-align:right;
+            padding:5px 0px;
+            color:#9E9C9C;
+        }
+        .record-arrow{
+            position: absolute;
+            width: 24px;
+            height: 14px;
+            background: url(../img/bg_dot_left3.png) no-repeat;
+            top: 15px;
+            left: -6px;
+            text-indent: -9999em;
+        }
+
+        .tag{
+            padding:6px;background-color:#00a2ca;margin:10px;color:white;cursor:pointer;border-radius:10px;
+        }
+        .add-tag{
+            margin:10px;color:#00a2ca;cursor:pointer;font-size:16px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div content="3" class="clearfix">
+    <div class="left" style="width:240px;height:200px;">&nbsp;</div>
+    <div class="left clearfix" style="border-left:2px dashed #ddd;width:70%;">
+
+
+        <div style="position:relative;">
+            <div class="time">2015-05-28 03:04:21 </div>
+            <div class="record-arrow"></div>
+            <div class="record">
+                NewDevice with AssetId [4647] has been inserted by Puppet agent
+                <div class="auther">
+                    <span><i class="fa fa-user"></i></span>
+                    <span>cmdb_reporter</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="position:relative;">
+            <div class="time">2015-05-28 03:04:21 </div>
+            <div class="record-arrow"></div>
+            <div class="record">
+                AssetID:[4647], model:[None], field:[os_release], value has changed from [None] to [2008 R2]
+                <div class="auther">
+                    <span><i class="fa fa-user"></i></span>
+                    <span>cmdb_reporter</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="position:relative;">
+            <div class="time">2015-05-28 03:04:21 </div>
+            <div class="record-arrow"></div>
+            <div class="record">
+                AssetID:[4647], model:[None], field:[os_distribution], value has changed from [None] to [windows]
+                <div class="auther">
+                    <span><i class="fa fa-user"></i></span>
+                    <span>cmdb_reporter</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="position:relative;">
+            <div class="time">2015-05-28 03:04:21 </div>
+            <div class="record-arrow"></div>
+            <div class="record">
+                AssetID:[4647], model:[None], field:[os_type], value has changed from [None] to [windows]
+                <div class="auther">
+                    <span><i class="fa fa-user"></i></span>
+                    <span>cmdb_reporter</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="position:relative;">
+            <div class="time">2015-05-28 03:04:21 </div>
+            <div class="record-arrow"></div>
+            <div class="record">
+                AssetID:[4647], model:[None], field:[sn], value has changed from [openstack] to [OpenStack_44454c4c-3500-1054-8031-c8c04f5a3432]
+                <div class="auther">
+                    <span><i class="fa fa-user"></i></span>
+                    <span>cmdb_reporter</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

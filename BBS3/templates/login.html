@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    {% load static %}
+    <script src=" {% static 'js/jquery.js' %} "></script>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/csrf_token.js' %}"></script>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form id="id_form" novalidate>
+                <h1 class="h1 text-center">登录</h1>
+                {% for form in form_obj %}
+                    <div class="form-group">
+                        <label for="{{ form.auto_id }}">{{ form.label }}: </label>
+                        {{ form }}
+                        <span style="color: red"></span>
+                    </div>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="id_code">验证码: </label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" id="id_code" name="code" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{% url 'get_code' %}" id="id_img" alt="code" width="360px" height="35px">
+                        </div>
+                    </div>
+                    <span id="id_code_error" style="color: red"></span>
+                </div>
+                <input type="button" id="id_btn" class="btn btn-success btn-block" value="登录">
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // form提交数据
+    $('#id_btn').click(function () {
+        let formDataObj = new FormData;
+        $.each($('#id_form').serializeArray(), function (index, obj) {
+            formDataObj.append(obj.name, obj.value)
+        })
+        formDataObj.append('code', $('#id_code').text());
+        formDataObj.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+        $.ajax({
+            url: '',
+            type: 'post',
+            contentType: false,
+            processData: false,
+            data: formDataObj,
+            success: function (args) {
+                if (args.code === 2000) {
+                    window.location.href = args.url;
+                } else if ((args.code === 4000)) {
+                    $.each(args.msg, function (index, obj) {
+                        let targetId = '#id_' + index;
+                        $(targetId).next().text(obj[0]).parent().addClass('has-error');
+                    })
+                }else{
+                    $('#id_code_error').text(args.msg)
+                }
+            }
+        })
+    })
+
+    // 移除has-error
+    $('input').focus(function () {
+        $(this).next().text('').parent().removeClass('has-error');
+    })
+
+    // 点击换验证码
+    $('#id_img').click(function () {
+            let oldSrc = $(this).attr('src');
+        $(this).attr('src', oldSrc + '?');
+    })
+</script>
+
+
+</body>
+</html>

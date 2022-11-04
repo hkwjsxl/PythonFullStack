@@ -1,0 +1,9 @@
+<data>
+    <country name="Panama">
+        <rank>69</rank>
+        <year>2026</year>
+        <gdppc>13600</gdppc>
+        <neighbor direction="W" name="Costa Rica" />
+        <neighbor direction="E" name="Colombia" />
+    </country>
+</data>

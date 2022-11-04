@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/plugsin.css" />
+    <link rel="stylesheet" href="../plugsin/font-awesome-4.3.0/css/font-awesome.css"/>
+    <style>
+        table {
+            border-spacing: 0px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>默认table</h1>
+
+<table class="list-table">
+    <thead id="search_list_head">
+    <tr>
+        <th><input type="checkbox"></th>
+        <th>设备类型</th>
+        <th>固资ID</th>
+        <th>CertName</th>
+        <th>区域</th>
+        <th>运营商</th>
+        <th>机房</th>
+        <th>楼层</th>
+        <th>机柜</th>
+        <th>机柜上位置</th>
+        <th>状态</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody id="search_list_content" style="font-size:13px;table-layout:fixed;WORD-BREAK: break-all;&quot;">
+
+
+    <tr auto-value="4675">
+        <td><input value="4675" auto-type="checkbox" type="checkbox" onclick="ToggleEdit(this);"></td>
+
+        <td auto-edit="enable" auto-type="select" name="device_type">server</td>
+
+
+        <td auto-edit="enable" auto-type="input" name="asset_op">8393</td>
+
+        <td auto-edit="enable" auto-type="input" name="hostname" style="max-width:150px;">ba301b4f6cde323df6301a66878af70e</td>
+
+        <td class="hide">40</td>
+
+        <td auto-edit="enable" auto-type="select" name="idc">北京</td>
+
+        <td auto-edit="enable" auto-type="select" name="idc">蓝汛</td>
+
+        <td auto-edit="enable" auto-type="select" name="idc">兆维BGP</td>
+
+        <td auto-edit="enable" auto-type="select" name="idc">4</td>
+
+        <td auto-edit="enable" auto-type="input" name="cabinet_num">D-19</td>
+
+        <td auto-edit="enable" auto-type="input" name="cabinet_order">1</td>
+
+        <td class="hide">53</td>
+
+        <td auto-edit="enable" auto-type="select" name="business_unit">运维部</td>
+
+        <td auto-edit="enable" auto-type="select" name="status"><span class="flag status1">上架（未上线）<span></span></span></td>
+        <td style="position:relative;">
+            <a href="/asset/detail?type=server&amp;id=4675"><i class="fa fa-paw" style="color:#00a2ca;"></i></a><span style="margin:0 3px;">|</span><a onclick="AssetEdit(this);"><i class="fa fa-pencil-square-o" style="color:#00a2ca;"></i></a>
+        </td>
+    </tr>
+
+    <tr auto-value="4674">
+        <td><input value="4674" auto-type="checkbox" type="checkbox" onclick="ToggleEdit(this);"></td>
+
+        <td auto-edit="enable" auto-type="select" name="device_type">server</td>
+
+
+        <td auto-edit="enable" auto-type="input" name="asset_op">8394</td>
+
+        <td auto-edit="enable" auto-type="input" name="hostname" style="max-width:150px;">aff437c33f7a85e8e90c58b853152cb4</td>
+
+        <td class="hide">40</td>
+
+        <td auto-edit="enable" auto-type="select" name="idc">北京</td>
+
+        <td auto-edit="enable" auto-type="select" name="idc">蓝汛</td>
+
+        <td auto-edit="enable" auto-type="select" name="idc">兆维BGP</td>
+
+        <td auto-edit="enable" auto-type="select" name="idc">4</td>
+
+        <td auto-edit="enable" auto-type="input" name="cabinet_num">D-19</td>
+
+        <td auto-edit="enable" auto-type="input" name="cabinet_order">2</td>
+
+        <td class="hide">53</td>
+
+        <td auto-edit="enable" auto-type="select" name="business_unit">运维部</td>
+
+
+        <td auto-edit="enable" auto-type="select" name="status"><span class="flag status1">上架（未上线）<span></span></span></td>
+        <td style="position:relative;">
+            <a href="/asset/detail?type=server&amp;id=4674"><i class="fa fa-paw" style="color:#00a2ca;"></i></a><span style="margin:0 3px;">|</span><a onclick="AssetEdit(this);"><i class="fa fa-pencil-square-o" style="color:#00a2ca;"></i></a>
+        </td>
+    </tr>
+
+
+
+    </tbody>
+</table>
+
+<div id="pagination" class="custom-paging  mt20 right">
+    <a href="#" onclick="ChangePager(1);return false;">首页</a><a href="#">上一页</a><a href="#" class="selected" onclick="ChangePager(1);return false;">1</a><a href="#" onclick="ChangePager(2);return false;">2</a><a href="#" onclick="ChangePager(3);return false;">3</a><a href="#" onclick="ChangePager(4);return false;">4</a><a href="#" onclick="ChangePager(5);return false;">5</a><a href="#" onclick="ChangePager(6);return false;">6</a><a href="#" onclick="ChangePager(7);return false;">7</a><a href="#" onclick="ChangePager(8);return false;">8</a><a href="#" onclick="ChangePager(9);return false;">9</a><a href="#" onclick="ChangePager(10);return false;">10</a><a href="#" onclick="ChangePager(11);return false;">11</a><a href="#" onclick="ChangePager(2);return false;">下一页</a><a href="#" onclick="ChangePager(90);return false;">末页</a><a href="javascript:void(0);">共 90 页/ 2676 条数据</a>
+</div>
+
+
+<h1>table改造格式</h1>
+
+<div class="guige">
+    <table class="guige-table">
+        <tbody>
+        <tr>
+            <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">网卡信息</th>
+        </tr>
+        <tr><td>名称</td><td>MAC地址</td><td>IP地址</td><td colspan="2">掩码</td></tr>
+
+        <tr><td>____</td><td>FA:16:3E:C8:BD:30</td><td>192.168.221.233</td><td colspan="2">255.255.224.0</td></tr>
+
+
+
+        <tr>
+            <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">
+                <span>内存信息</span>
+
+                <span>(16G)</span>
+
+
+            </th>
+        </tr>
+        <tr><td>插槽</td><td>容量</td><td>型号</td><td colspan="2">制造商</td></tr>
+
+        <tr><td>DIMM 0</td><td>16.0</td><td></td><td colspan="2"></td></tr>
+
+
+        <tr>
+            <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">
+                <span>硬盘信息</span>
+            </th>
+        </tr>
+        <tr><td>插槽</td><td>容量</td><td>接口类型</td><td>型号</td><td>制造商</td></tr>
+
+        <tr>
+            <th colspan="5" class="title f14" style="border-left:2px solid #0488cd;">RAID适配器信息</th>
+        </tr>
+        <tr><td colspan="2">名称</td><td colspan="3">型号</td></tr>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

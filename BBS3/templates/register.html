@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    {% load static %}
+    <script src=" {% static 'js/jquery.js' %} "></script>
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/csrf_token.js' %}"></script>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form id="id_form" novalidate>
+                <h1 class="h1 text-center">注册</h1>
+                {% for form in form_obj %}
+                    <div class="form-group">
+                        <label for="{{ form.auto_id }}">{{ form.label }}: </label>
+                        {{ form }}
+                        <span style="color: red"></span>
+                    </div>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="id_file">
+                        头像
+                        <img src="{% static 'img/default.jpg' %}" alt="头像"
+                             id="id_img" style="width:100px;margin-left: 15px;border-radius: 50%">
+                    </label>
+                    <input type="file" id="id_file" style="display: none">
+                </div>
+            </form>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" id="id_btn">
+                    注册
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // 获取头像
+    $('#id_file').change(function () {
+        let fileReaderObj = new FileReader;
+        let file_obj = $(this)[0].files[0];
+        fileReaderObj.readAsDataURL(file_obj);
+        fileReaderObj.onload = function () {
+            $('#id_img').attr('src', fileReaderObj.result)
+        }
+    })
+
+    // ajax 注册
+    $('#id_btn').click(function () {
+        let formDataObj = new FormData;
+        $.each($('#id_form').serializeArray(), function (index, obj) {
+            formDataObj.append(obj.name, obj.value)
+        })
+        formDataObj.append('avatar', $('#id_file')[0].files[0]);
+        formDataObj.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+        $.ajax({
+            url: '',
+            type: 'post',
+            data: formDataObj,
+            contentType: false,
+            processData: false,
+            success: function (args) {
+                if (args.code === 2000) {
+                    window.location.href = args.url;
+                } else {
+                    $.each(args.msg, function (index, obj) {
+                        let targetId = '#id_' + index;
+                        $(targetId).next().text(obj[0]).parent().addClass('has-error');
+                    })
+                }
+            }
+        })
+    })
+    // 移除has-error
+    $('input').focus(function () {
+        $(this).next().text('').parent().removeClass('has-error');
+    })
+</script>
+
+
+</body>
+</html>

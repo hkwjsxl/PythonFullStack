@@ -1,0 +1,24 @@
+Windows 7 如无法执行则需升级 Powershell 到 3.0 以上，XP 不支持，
+下载地址：https://docs.microsoft.com/powershell/scripting/install/installing-powershell
+需要nodejs环境
+地址：https://nodejs.org/en/
+以 管理员身份 打开 Powershell，Windows 10 快捷入口：Win + X - Windows Powershell(管理员)(A)
+复制以下代码，右键粘贴到命令行回车，打开安装菜单。
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
+Invoke-Expression -Command (Invoke-WebRequest -UseBasicParsing -Uri https://sourl.cn/hxaaD4).Content
+随后选择 1 即安装。
+安装完毕后选择 3 运行。
+如需添加开机自启，则执行 7。
+最后输入 0 退出。
+打开网易云音乐客户端，进入设置页面，设置自定义代理
+自定义代理 ：填写服务器地址和端口号
+代理服务器地址：127.0.0.1 （推荐本机搭建，速度快）
+代理服务器端口：6666
+---结束---
+
+
+
+https://sourl.cn/hxaaD4
+https://raw.githubusercontent.com/HkwJsxl/Python/main/Interface%20api/wyyAPI.ps1
+
+https://bit.ly/2RYvE3p

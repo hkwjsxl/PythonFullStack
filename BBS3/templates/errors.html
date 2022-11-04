@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>404 - 页面未找到</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <style>
+        p{
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <h1 class="h1 text-center">404 - error</h1>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><b>404.</b> 抱歉，您访问的资源不存在。</h3>
+                </div>
+                <div class="panel-body">
+                    <p>代码改变世界，联系邮箱 hkwJsxl@gmail.com</p>
+                    <p>享受代码之美，联系电话 18533538210</p>
+                </div>
+            </div>
+            <img src="{% static 'img/errors.png' %}" alt="robot">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

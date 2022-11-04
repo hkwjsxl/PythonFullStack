@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="../plugsin/font-awesome-4.3.0/css/font-awesome.css"/>
+</head>
+<body>
+
+
+    <div class="w">
+        <div class="pg-header">
+            <div class="top-logo left">
+                <span>AutoEngine</span>
+            </div>
+            <div class="top-menu left">
+                <ul>
+                    <li><a href="/api/v1.0/tree_index/">资产列表</a></li>
+                    <li class="active"><a href="/home/summary">配置管理</a></li>
+                </ul>
+            </div>
+
+
+
+            <div class="top-account right">
+                <ul>
+                    <li class="top-menu-item">
+                        <span class="login-name">root</span>
+                        <span class="fa fa-user font24"></span>
+                        <div class="child-menu clearfix hide">
+                            <ul>
+                                <li><a href="/user/index/">个人信息</a></li>
+                                <li><a href="/account/logout/">退出</a></li>
+                            </ul>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+
+            <div class="top-search right">
+                <div class="search-wrapper">
+                    <form id="GlobalSearch" action="/home/search/" method="GET">
+                        <input class="input left" id="GlobalSearchIp" name="ips" placeholder=" 快 速 搜 索" value="">
+                        <input class="hide" name="page" id="GlobalSearchPage" value="1">
+                        <a class="btn left" type="submit" onclick="DoGlobalSearch();" style="cursor:pointer;"><i class="fa fa-search" style="color:#ABAAAA;"></i></a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="pg-body">
+            <div class="body-tree-menu left" id="scalable-menu">
+                <div class="scalable-menu-title" style="position:relative;">
+                    <div class="summary-title">CMDB功能
+
+                    </div>
+
+                </div>
+                <div class="scalable-menu-body">
+                    <div class="item">
+                        <div class="title clearfix">
+                            <div class="left"><i class="fa fa-indent"></i><span>资产管理</span></div>
+                            <div class="right"><i class="fa fa-caret-down fa-caret-up"></i></div>
+                        </div>
+                        <div class="body">
+                            <a id="home_summary" class="option clearfix selected" href="/home/summary/">
+                                <div>
+                                    <img class="left" src="../img/layout/dash.png" alt="">
+                                    <span class="display left">资产概要</span>
+                                </div>
+                            </a>
+
+                            <a id="asset_list" class="option clearfix" href="/asset/list/">
+                                <div href="/asset/list/">
+                                    <img class="left" src="../img/layout/dash.png" alt="">
+                                    <span class="display left">资产列表</span>
+                                </div>
+                            </a>
+                            <a id="asset_alteration" class="option clearfix" href="/asset/alteration/">
+                                <div>
+                                    <img class="left" src="../img/layout/dash.png" alt="">
+                                    <span class="display left">资产变更</span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="item">
+                        <div class="title clearfix">
+                            <div class="left"><i class="fa fa-user"></i><span>用户中心</span></div>
+                            <div class="right"><i class="fa fa-caret-down"></i></div>
+                        </div>
+                        <div class="body hide">
+                            <a id="user_index" class="option clearfix" href="/user/index/">
+                                <div>
+                                    <img class="left" src="../img/layout/dash.png" alt="">
+                                    <span class="display left">用户信息</span>
+                                </div>
+                            </a>
+                            <a id="user_changepwd" class="option clearfix" href="/user/changepwd/">
+                                <div>
+                                    <img class="left" src="../img/layout/dash.png" alt="">
+                                    <span class="display left">密码修改</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="body_crumbs" class="body-crumbs">
+                <ul>
+
+                    <li><a href="/home/summary/">首页</a></li>
+                    <li>资产概要</li>
+
+                </ul>
+
+            </div>
+
+            <div id="body_content" class="body-content left">
+                <div class="main-content">
+
+                    <!-- 遮罩层开始 -->
+                    <div id="shade" class="shade hide"></div>
+                    <!-- 遮罩层结束 -->
+                    <!-- 加载层开始 -->
+                    <div id="loading" class="loading hide"></div>
+                    <!-- 加载层结束 -->
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../js/layout.js"></script>
+
+
+
+</body>
+</html>

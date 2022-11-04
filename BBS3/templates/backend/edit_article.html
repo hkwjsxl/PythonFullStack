@@ -1,0 +1,61 @@
+{% extends 'backend/base.html' %}
+
+{% block title %}
+    <title>edit_article</title>
+{% endblock %}
+
+
+{% block right_body %}
+    <div class="panel-title">
+        <a href="{% url 'add_article' %}">&nbsp;&nbsp;添加文章</a>
+    </div>
+    <br>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_title">标题</label>
+            <input type="text" id="id_title" name="title" class="form-control" value="{{ article_obj.title }}">
+        </div>
+        <div class="form-group">
+            <label for="id_content">内容</label>
+            <br>
+            <textarea name="content" id="id_content" cols="60" rows="10" class="form-control">{{ article_obj.content }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="">分类</label>
+            <br>
+            {% for category in category_list %}
+                <label for="category_{{ category.pk }}"></label>
+                <input type="radio" id="category_{{ category.pk }}" name="category" value="{{ category.pk }}">
+                {{ category.name }}
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label for="">标签</label>
+            <br>
+            {% for tag in tag_list %}
+                <label for="tag_{{ tag.pk }}"></label>
+                <input type="checkbox" id="tag_{{ tag.pk }}" name="tags" value="{{ tag.pk }}">{{ tag.name }}
+            {% endfor %}
+        </div>
+        <input type="submit" value="保存" class="btn btn-primary btn-sm">
+        <a href="{% url 'base' %}" class="btn btn-primary btn-sm">取消</a>
+    </form>
+{% endblock %}
+
+{% block js %}
+    {% load static %}
+    <script charset="utf-8" src="{% static 'kindeditor/kindeditor-all-min.js' %}"></script>
+    <script>
+        KindEditor.ready(function (K) {
+            window.editor = K.create('#id_content', {
+                width: '100%',
+                height: '350px',
+                extraFileUploadParams: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                uploadJson: "{% url 'upload_json' %}",
+            });
+        });
+    </script>
+{% endblock %}
