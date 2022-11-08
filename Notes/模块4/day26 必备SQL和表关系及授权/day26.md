@@ -91,7 +91,7 @@ select * from info where id not in (1,4,6);
 select * from info where id in (select id from depart);
 # select * from info where id in (1,2,3);
 
-# exists select * from depart where id=5，去查数据是否存在，如果存在，如果不存在。
+# exists select * from depart where id=5，去查数据是否存在，如果存在，执行前面语句，如果不存在，则不执行。
 select * from info where exists (select * from depart where id=5);
 select * from info where not exists (select * from depart where id=5);
 
@@ -222,28 +222,6 @@ select * from info order by age asc,id desc; -- 优先按照age从小到大；�
 select * from info where id>10 order by age asc,id desc;
 select * from info where id>6 or name like "%y" order by age asc,id desc;
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -431,7 +409,7 @@ select * from info inner join depart on info.depart_id=depart.id;
 
 
 
-### 1.8 联合
+### 1.8 联合(上下连表)
 
 ![image-20210519093004885](assets/image-20210519093004885.png)
 
@@ -498,7 +476,7 @@ select id from info;
 
 在开发中往往还会为他们添加一个 **外键约束**，保证某一个列的值必须是其他表中的特定列已存在的值，例如：`info.depart_id`的值必须是 `depart.id`中已存在的值。
 
-
+### 外键
 
 **一对多示例：**
 

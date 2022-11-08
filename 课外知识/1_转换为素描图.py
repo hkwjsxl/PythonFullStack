@@ -2,7 +2,7 @@
 import cv2
 
 # 读取图片
-img = cv2.imread("suolong.jpg")
+img = cv2.imread("img.jpg")
 # 灰度
 grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 invert = cv2.bitwise_not(grey)

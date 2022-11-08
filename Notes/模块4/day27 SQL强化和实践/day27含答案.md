@@ -178,8 +178,15 @@
 11. 查询选修了 “生物课” 且分数低于60的的所有学生ID、学生姓名、成绩。
 
     ```sql
-    
-    select student.sid,student.sname,score.num from score left join course on score.course_id =course.cid left join student on score.student_id=student.sid where course.cname="生物" and score.num < 60;
+    select 
+    	student.sid,
+    	student.sname,
+    	score.num 
+    from 
+    	score 
+    	left join course on score.course_id =course.cid 
+    	left join student on score.student_id=student.sid 
+    where course.cname="生物" and score.num<60;
     ```
 
     
@@ -189,7 +196,14 @@
     ```sql
     select student_id,count(1),sum(num) from score group by student_id;
     
-    select student_id,student.sname,count(1),sum(num) from score left join student on score.student_id=student.sid group by student_id;
+    select 
+    	student_id,
+    	student.sname,
+    	count(1),
+    	sum(num) 
+    from score 
+    	left join student on score.student_id=student.sid 
+    group by student_id;
     ```
 
 13. 查询各科被选修的学生数。
@@ -217,7 +231,6 @@
     ```sql
     select course_id,course.cname,avg(num) from score left join course on score.course_id =course.cid group by course_id order by avg(num) desc;
     
-    
     select course_id,course.cname,avg(num) as A from score left join course on score.course_id =course.cid group by course_id order by A desc;
     ```
 
@@ -227,6 +240,8 @@
     10/20 = 及格率
     
     select course_id,count(1) from score group by course_id;
+    
+    
     ```
 
     ```sql
@@ -386,6 +401,7 @@
         WHERE
             teacher.tname = "波多" 
     )
+    
     ```
 
 24. 查询选修 “苍空” 老师所授课程的学生中，成绩最高的学生姓名及其成绩（不考虑并列）。
@@ -429,6 +445,7 @@
             WHERE
             teacher.tname = "苍空" 
     	)
+    
     ```
 
 26. 查询只选修了一门课程的全部学生的学号、姓名。
@@ -575,7 +592,7 @@
     WHERE
     	score.course_id in ( select course_id from score where student_id=2)
     	and score.student_id in (
-        	select student_id from score where student_id!=2 group by student having count(1) = select count(1) from score where student_id=2
+        	select student_id from score where student_id!=2 group by student_id having count(1) = select count(1) from score where student_id=2
         )
     GROUP BY
     	student_id
@@ -929,3 +946,4 @@ create table up_down(
 
 
 
+``
