@@ -79,32 +79,6 @@ B+Tree结构连接：https://www.cs.usfca.edu/~galles/visualization/BPlusTree.ht
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### 1.1.1 非聚簇索引（mysiam引擎）
 
 ```sql
@@ -254,7 +228,7 @@ alter table 表名 add primary key(列名);
 alter table 表名 drop primary key;
 ```
 
-注意：删除索引时可能会报错，自增列必须定义为键。
+**注意：**删除索引时可能会报错，自增列必须定义为键。
 
 ```
 ERROR 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
@@ -500,18 +474,6 @@ select * from big where name = "kelly" and password="ffsijfs";
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ### 1.4 执行计划
 
 MySQL中提供了执行计划，让你能够预判SQL的执行（只能给到一定的参考，不一定完全能预判准确）。
@@ -584,10 +546,10 @@ explain + SQL语句;
 
 其他列：
 
-```
+```sql
 id，查询顺序标识
 
-z，查询类型
+select_type，查询类型
     SIMPLE          简单查询
     PRIMARY         最外层查询
     SUBQUERY        映射为子查询
@@ -645,7 +607,7 @@ extra，该列包含MySQL解决查询的详细信息。
 
 MySQL中提供了很多函数，为我们的SQL操作提供便利，例如：
 
-```
+```sql
 mysql> select * from d1;
 +----+-----------+
 | id | name      |
@@ -707,7 +669,7 @@ mysql> select sleep(1);
 
 部分函数列表：
 
-```
+```sql
 CHAR_LENGTH(str)
     返回值为字符串str 的长度，长度的单位为字符。一个多字节字符算作一个单字符。
     对于一个包含五个二字节字符集, LENGTH()返回值为 10, 而CHAR_LENGTH()的返回值为5。
