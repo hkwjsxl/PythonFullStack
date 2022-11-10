@@ -1,4 +1,3 @@
-# https://gist.github.com/vcheckzen/8d4b50a342fb695c7f07c6a6f0ad8297
 # Requires -RunAsAdministrator
 $PROGRAM_NAME = 'UnblockNeteaseMusic'
 # $AUTHOR_NAME = '1715173329'
@@ -30,6 +29,8 @@ $UNBLOCKNETEASEMUSIC_VERSION_PATH = "$TMP_PATH\$PROGRAM_NAME.version"
 $UNBLOCKNETEASEMUSIC_RUN_COMMAND_PATH = "$TMP_PATH\$PROGRAM_NAME.run"
 $UNBLOCKNETEASEMUSIC_EXEC_PATH = "$BIN_PATH\$REPO_NAME-$BRANCH_NAME"
 $UNBLOCKNETEASEMUSIC_EXEC_FILE = "$UNBLOCKNETEASEMUSIC_EXEC_PATH\app.js"
+$UNBLOCKNETEASEMUSIC_CERTIFICATE_AUTHORITY_FILE = "$UNBLOCKNETEASEMUSIC_EXEC_PATH\ca.crt"
+$UNBLOCKNETEASEMUSIC_CERTIFICATE_AUTHORITY_NAME = "$PROGRAM_NAME Root CA"
 
 $WORKING_DIRECTORY = "$UNBLOCKNETEASEMUSIC_EXEC_PATH"
 # $DEFAULT_ARGUMENT = 'app.js -p 6666:6667 -s -e http://music.163.com -f 59.111.19.33'
@@ -47,7 +48,7 @@ function ShowMenu () {
     WriteLine
     @"
      网易云解锁安装脚本
-            V0.06 2021.08.31
+            V0.07 2022.10.21
             SINCE 2019.09.10
                 AUTHOR @LOGI
 ----------------------------
@@ -118,7 +119,7 @@ function ClsWorkaround {
     Clear-Host
 }
 
-function Test-Administrator {  
+function Test-Administrator {
     $User = [Security.Principal.WindowsIdentity]::GetCurrent()
     return (New-Object Security.Principal.WindowsPrincipal $User).IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
@@ -135,12 +136,18 @@ function NewPath($Path) {
 
 function RemovePath($Path) {
     if (Test-Path -Path "$Path") {
-        try {
-            Get-ChildItem -Path "$Path" -File -Recurse | Remove-Item -Force
-            Get-ChildItem -Path "$Path" -Directory -Recurse | Remove-Item -Recurse -Force
+        if ((Get-Item "$Path") -is [System.IO.DirectoryInfo]) {
+            try {
+                Get-ChildItem -Path "$Path" -File -Recurse | Remove-Item -Force
+                Get-ChildItem -Path "$Path" -Directory -Recurse | Remove-Item -Recurse -Force
+                Remove-Item "$Path" -Force
+            }
+            catch {
+                cmd /c rd /s /q "$Path"
+            }
         }
-        catch {
-            cmd /c rd /s /q "$Path"
+        else {
+            Remove-Item "$Path" -Force
         }
     }
 }
@@ -189,6 +196,26 @@ function SaveRunConfigCommand($Command) {
     "$Command" | Out-File -Encoding ascii -FilePath "$UNBLOCKNETEASEMUSIC_RUN_COMMAND_PATH"
 }
 
+function InstallCertificateAuthority {
+    try {
+        $Null = cmd /c certutil -addstore Root "$UNBLOCKNETEASEMUSIC_CERTIFICATE_AUTHORITY_FILE"
+    }
+    catch {
+        return
+    }
+    "Root CA 已加载"
+}
+
+function UninstallCertificateAuthority {
+    try {
+        $Null = cmd /c certutil -delstore Root "$UNBLOCKNETEASEMUSIC_CERTIFICATE_AUTHORITY_NAME"
+    }
+    catch {
+        return
+    }
+    "Root CA 已删除"
+}
+
 function InstallUnblockNeteaseMusic ($Update) {
     if (!($Update) -and (CheckInstallationStatus)) {
         "$PROGRAM_NAME 已经安装"
@@ -202,6 +229,7 @@ function InstallUnblockNeteaseMusic ($Update) {
     if (!(Test-Path -Path "$NODE_EXEC_PATH")) {
         "正在下载 $NODE_NAME"
         try {
+            # https://github.com/PowerShell/PowerShell/issues/14348
             Invoke-WebRequest -UseBasicParsing -Uri "$NODE_URI" -OutFile "$NODE_SAVE_PATH"
         }
         catch {
@@ -211,7 +239,7 @@ function InstallUnblockNeteaseMusic ($Update) {
         "正在解压 $NODE_NAME"
         ReleaseZip "$NODE_SAVE_PATH" "$BIN_PATH"
     }
-    
+
     "正在下载 $PROGRAM_NAME"
     try {
         Invoke-WebRequest -UseBasicParsing -Uri "$UNBLOCKNETEASEMUSIC_URI" -OutFile "$UNBLOCKNETEASEMUSIC_SAVE_PATH"
@@ -224,6 +252,8 @@ function InstallUnblockNeteaseMusic ($Update) {
     "正在解压 $PROGRAM_NAME"
     RemovePath "$UNBLOCKNETEASEMUSIC_EXEC_PATH"
     ReleaseZip "$UNBLOCKNETEASEMUSIC_SAVE_PATH" "$BIN_PATH"
+
+    InstallCertificateAuthority
 
     $StartMessage = (StartUnblockNeteaseMusic) + "`n" + (EnableUnblockNeteaseMusicAutoBoot)
     if ($Update) {
@@ -245,6 +275,7 @@ function UninstallUnblockNeteaseMusic() {
     StopUnblockNeteaseMusic
     DisableUnblockNeteaseMusicAutoBoot
     RemovePath "$INSTALLATION_PATH"
+    UninstallCertificateAuthority
     "$PROGRAM_NAME 卸载完成"
 }
 
@@ -285,11 +316,17 @@ function StopUnblockNeteaseMusic() {
 }
 
 function IsLastestVersion () {
+    # https://stackoverflow.com/questions/18770723/hide-progress-of-invoke-webrequest
+    $OriginalPref = $ProgressPreference
+    $ProgressPreference = "SilentlyContinue"
     try {
         $Commit = (Invoke-WebRequest -UseBasicParsing -Uri "$UNBLOCKNETEASEMUSIC_COMMIT_URI").Content
     }
     catch {
         return $False
+    }
+    finally {
+        $ProgressPreference = $OriginalPref
     }
 
     try {
