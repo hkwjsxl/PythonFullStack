@@ -1,0 +1,4 @@
+# 设置git缓存大小
+git config --global http.postBuffer 524288000
+# 查看设置值
+git config --list
