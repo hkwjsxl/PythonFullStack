@@ -34,7 +34,7 @@ KindEditor.plugin('filemanager', function(K) {
 			'<div class="ke-plugin-filemanager-header">',
 			// left start
 			'<div class="ke-left">',
-			'<img class="ke-inline-block" name="moveupImg" src="' + imgPath + 'go-up.gif" width="16" height="16" border="0" alt="" /> ',
+			'<img class="ke-inline-block" name="moveupImg" core="' + imgPath + 'go-up.gif" width="16" height="16" border="0" alt="" /> ',
 			'<a class="ke-inline-block" name="moveupLink" href="javascript:;">' + lang.moveup + '</a>',
 			'</div>',
 			// right start
@@ -139,7 +139,7 @@ KindEditor.plugin('filemanager', function(K) {
 					K(this).removeClass('ke-on');
 				});
 				var iconUrl = imgPath + (data.is_dir ? 'folder-16.gif' : 'file-16.gif'),
-					img = K('<img src="' + iconUrl + '" width="16" height="16" alt="' + data.filename + '" align="absmiddle" />'),
+					img = K('<img core="' + iconUrl + '" width="16" height="16" alt="' + data.filename + '" align="absmiddle" />'),
 					cell0 = K(row[0].insertCell(0)).addClass('ke-cell ke-name').append(img).append(document.createTextNode(' ' + data.filename));
 				if (!data.is_dir || data.has_file) {
 					row.css('cursor', 'pointer');
@@ -169,7 +169,7 @@ KindEditor.plugin('filemanager', function(K) {
 				div.append(photoDiv);
 				var fileUrl = result.current_url + data.filename,
 					iconUrl = data.is_dir ? imgPath + 'folder-64.gif' : (data.is_photo ? fileUrl : imgPath + 'file-64.gif');
-				var img = K('<img src="' + iconUrl + '" width="80" height="80" alt="' + data.filename + '" />');
+				var img = K('<img core="' + iconUrl + '" width="80" height="80" alt="' + data.filename + '" />');
 				if (!data.is_dir || data.has_file) {
 					photoDiv.css('cursor', 'pointer');
 					bindTitle(photoDiv, data);

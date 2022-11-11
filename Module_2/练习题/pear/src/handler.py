@@ -1,4 +1,4 @@
-from src.service import download, search, page
+from core.service import download, search, page
 
 
 def run():

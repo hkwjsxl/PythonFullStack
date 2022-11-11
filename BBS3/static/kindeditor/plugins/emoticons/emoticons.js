@@ -28,7 +28,7 @@ KindEditor.plugin('emoticons', function(K) {
 		var previewDiv, previewImg;
 		if (allowPreview) {
 			previewDiv = K('<div class="ke-preview"></div>').css('right', 0);
-			previewImg = K('<img class="ke-preview-img" src="' + path + startNum + '.gif" />');
+			previewImg = K('<img class="ke-preview-img" core="' + path + startNum + '.gif" />');
 			wrapperDiv.append(previewDiv);
 			previewDiv.append(previewImg);
 		}
@@ -54,7 +54,7 @@ KindEditor.plugin('emoticons', function(K) {
 				K(this).removeClass('ke-on');
 			});
 			cell.click(function(e) {
-				self.insertHtml('<img src="' + path + num + '.gif" border="0" alt="" />').hideMenu().focus();
+				self.insertHtml('<img core="' + path + num + '.gif" border="0" alt="" />').hideMenu().focus();
 				e.stop();
 			});
 		}

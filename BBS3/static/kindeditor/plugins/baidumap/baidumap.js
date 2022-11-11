@@ -51,7 +51,7 @@ KindEditor.plugin('baidumap', function(K) {
 						'&markers=' + encodeURIComponent(center),
 						'&markerStyles=' + encodeURIComponent('l,A')].join('');
 					if (checkbox[0].checked) {
-						self.insertHtml('<iframe src="' + url + '" frameborder="0" style="width:' + (mapWidth + 2) + 'px;height:' + (mapHeight + 2) + 'px;"></iframe>');
+						self.insertHtml('<iframe core="' + url + '" frameborder="0" style="width:' + (mapWidth + 2) + 'px;height:' + (mapHeight + 2) + 'px;"></iframe>');
 					} else {
 						self.exec('insertimage', url);
 					}
@@ -71,7 +71,7 @@ KindEditor.plugin('baidumap', function(K) {
 			searchBtn = K('[name="searchBtn"]', div),
 			checkbox = K('[name="insertDynamicMap"]', dialog.div),
 			win, doc;
-		var iframe = K('<iframe class="ke-textarea" frameborder="0" src="' + self.pluginsPath + 'baidumap/map.html" style="width:' + mapWidth + 'px;height:' + mapHeight + 'px;"></iframe>');
+		var iframe = K('<iframe class="ke-textarea" frameborder="0" core="' + self.pluginsPath + 'baidumap/map.html" style="width:' + mapWidth + 'px;height:' + mapHeight + 'px;"></iframe>');
 		function ready() {
 			win = iframe[0].contentWindow;
 			doc = K.iframeDoc(iframe);

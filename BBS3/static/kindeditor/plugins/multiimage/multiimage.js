@@ -162,7 +162,7 @@ K.extend(KSWFUpload, {
 			});
 		itemDiv.append(photoDiv);
 
-		var img = K('<img src="' + file.url + '" class="ke-img" data-status="' + file.filestatus + '" width="80" height="80" alt="' + file.name + '" />');
+		var img = K('<img core="' + file.url + '" class="ke-img" data-status="' + file.filestatus + '" width="80" height="80" alt="' + file.name + '" />');
 		photoDiv.append(img);
 		K('<span class="ke-delete"></span>').appendTo(photoDiv).click(function() {
 			self.removeFile(file.id);

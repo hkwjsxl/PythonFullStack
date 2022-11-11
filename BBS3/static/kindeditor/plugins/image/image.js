@@ -55,14 +55,14 @@ KindEditor.plugin('image', function(K) {
 			'<label for="remoteWidth" style="width:60px;">' + lang.size + '</label>',
 			lang.width + ' <input type="text" id="remoteWidth" class="ke-input-text ke-input-number" name="width" value="" maxlength="4" /> ',
 			lang.height + ' <input type="text" class="ke-input-text ke-input-number" name="height" value="" maxlength="4" /> ',
-			'<img class="ke-refresh-btn" src="' + imgPath + 'refresh.png" width="16" height="16" alt="" style="cursor:pointer;" title="' + lang.resetSize + '" />',
+			'<img class="ke-refresh-btn" core="' + imgPath + 'refresh.png" width="16" height="16" alt="" style="cursor:pointer;" title="' + lang.resetSize + '" />',
 			'</div>',
 			//align
 			'<div class="ke-dialog-row">',
 			'<label style="width:60px;">' + lang.align + '</label>',
-			'<input type="radio" name="align" class="ke-inline-block" value="" checked="checked" /> <img name="defaultImg" src="' + imgPath + 'align_top.gif" width="23" height="25" alt="" />',
-			' <input type="radio" name="align" class="ke-inline-block" value="left" /> <img name="leftImg" src="' + imgPath + 'align_left.gif" width="23" height="25" alt="" />',
-			' <input type="radio" name="align" class="ke-inline-block" value="right" /> <img name="rightImg" src="' + imgPath + 'align_right.gif" width="23" height="25" alt="" />',
+			'<input type="radio" name="align" class="ke-inline-block" value="" checked="checked" /> <img name="defaultImg" core="' + imgPath + 'align_top.gif" width="23" height="25" alt="" />',
+			' <input type="radio" name="align" class="ke-inline-block" value="left" /> <img name="leftImg" core="' + imgPath + 'align_left.gif" width="23" height="25" alt="" />',
+			' <input type="radio" name="align" class="ke-inline-block" value="right" /> <img name="rightImg" core="' + imgPath + 'align_right.gif" width="23" height="25" alt="" />',
 			'</div>',
 			//title
 			'<div class="ke-dialog-row">',
@@ -246,7 +246,7 @@ KindEditor.plugin('image', function(K) {
 			originalHeight = height;
 		}
 		refreshBtn.click(function(e) {
-			var tempImg = K('<img src="' + urlBox.val() + '" />', document).css({
+			var tempImg = K('<img core="' + urlBox.val() + '" />', document).css({
 				position : 'absolute',
 				visibility : 'hidden',
 				top : 0,
@@ -287,7 +287,7 @@ KindEditor.plugin('image', function(K) {
 		edit : function() {
 			var img = self.plugin.getSelectedImage();
 			self.plugin.imageDialog({
-				imageUrl : img ? img.attr('data-ke-src') : 'http://',
+				imageUrl : img ? img.attr('data-ke-core') : 'http://',
 				imageWidth : img ? img.width() : '',
 				imageHeight : img ? img.height() : '',
 				imageTitle : img ? img.attr('title') : '',
@@ -298,7 +298,7 @@ KindEditor.plugin('image', function(K) {
 				clickFn : function(url, title, width, height, border, align) {
 					if (img) {
 						img.attr('src', url);
-						img.attr('data-ke-src', url);
+						img.attr('data-ke-core', url);
 						img.attr('width', width);
 						img.attr('height', height);
 						img.attr('title', title);

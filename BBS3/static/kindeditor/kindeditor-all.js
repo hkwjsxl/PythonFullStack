@@ -156,7 +156,8 @@ function _extend(child, parent, proto) {
 	child.prototype = childProto;
 	child.parent = parent ? parent.prototype : null;
 }
-
+
+
 function _json(text) {
 	var match;
 	if ((match = /\{[\s\S]*\}|\[[\s\S]*\]/.exec(text))) {
@@ -316,9 +317,12 @@ K.options = {
 
 
 var _useCapture = false;
-
-var _INPUT_KEY_MAP = _toMap('8,9,13,32,46,48..57,59,61,65..90,106,109..111,188,190..192,219..222');
-var _CURSORMOVE_KEY_MAP = _toMap('33..40');
+
+
+var _INPUT_KEY_MAP = _toMap('8,9,13,32,46,48..57,59,61,65..90,106,109..111,188,190..192,219..222');
+
+var _CURSORMOVE_KEY_MAP = _toMap('33..40');
+
 var _CHANGE_KEY_MAP = {};
 _each(_INPUT_KEY_MAP, function(key, val) {
 	_CHANGE_KEY_MAP[key] = val;
@@ -326,14 +330,16 @@ _each(_INPUT_KEY_MAP, function(key, val) {
 _each(_CURSORMOVE_KEY_MAP, function(key, val) {
 	_CHANGE_KEY_MAP[key] = val;
 });
-
+
+
 function _bindEvent(el, type, fn) {
 	if (el.addEventListener){
 		el.addEventListener(type, fn, _useCapture);
 	} else if (el.attachEvent){
 		el.attachEvent('on' + type, fn);
 	}
-}
+}
+
 function _unbindEvent(el, type, fn) {
 	if (el.removeEventListener){
 		el.removeEventListener(type, fn, _useCapture);
@@ -344,7 +350,8 @@ function _unbindEvent(el, type, fn) {
 var _EVENT_PROPS = ('altKey,attrChange,attrName,bubbles,button,cancelable,charCode,clientX,clientY,ctrlKey,currentTarget,' +
 	'data,detail,eventPhase,fromElement,handler,keyCode,metaKey,newValue,offsetX,offsetY,originalTarget,pageX,' +
 	'pageY,prevValue,relatedNode,relatedTarget,screenX,screenY,shiftKey,srcElement,target,toElement,view,wheelDelta,which').split(',');
-
+
+
 function KEvent(el, event) {
 	this.init(el, event);
 }
@@ -901,7 +908,8 @@ function _formatHtml(html, htmlTags, urlType, wellFormatted, indentChar) {
 	html = html.replace(/\n\s*\n/g, '\n');
 	html = html.replace(/<span id="__kindeditor_pre_newline__">\n/g, '\n');
 	return _trim(html);
-}
+}
+
 function _clearMsWord(html, htmlTags) {
 	html = html.replace(/<meta[\s\S]*?>/ig, '')
 		.replace(/<![\s\S]*?>/ig, '')
@@ -914,7 +922,8 @@ function _clearMsWord(html, htmlTags) {
 			return full.replace(/border-bottom:([#\w\s]+)/ig, 'border:$1');
 		});
 	return _formatHtml(html, htmlTags);
-}
+}
+
 function _mediaType(src) {
 	if (/\.(rm|rmvb)(\?|$)/i.test(src)) {
 		return 'audio/x-pn-realaudio-plugin';
@@ -923,7 +932,8 @@ function _mediaType(src) {
 		return 'application/x-shockwave-flash';
 	}
 	return 'video/x-ms-asf-plugin';
-}
+}
+
 function _mediaClass(type) {
 	if (/realaudio/i.test(type)) {
 		return 'ke-rm';
@@ -960,14 +970,17 @@ function _mediaImg(blankPath, attrs) {
 	} else if (height > 0) {
 		style += 'height:' + height + 'px;';
 	}
-	var html = '<img class="' + _mediaClass(type) + '" src="' + blankPath + '" ';
+	var html = '<img class="' + _mediaClass(type) + '" core="' + blankPath + '" ';
 	if (style !== '') {
 		html += 'style="' + style + '" ';
 	}
 	html += 'data-ke-tag="' + escape(srcTag) + '" alt="" />';
 	return html;
 }
-
+
+
+
+
 function _tmpl(str, data) {
 	var fn = new Function("obj",
 		"var p=[],print=function(){p.push.apply(p,arguments);};" +
@@ -1304,7 +1317,8 @@ function _getScrollPos(doc) {
 	}
 	return {x : x, y : y};
 }
-
+
+
 function KNode(node) {
 	this.init(node);
 }
@@ -1940,7 +1954,8 @@ function _copyAndDelete(range, isCopy, isDelete) {
 		}
 	}
 	return isCopy ? frag : range;
-}
+}
+
 function _moveToElementText(range, el) {
 	var node = el;
 	while (node) {
@@ -1953,7 +1968,8 @@ function _moveToElementText(range, el) {
 	try {
 		range.moveToElementText(el);
 	} catch(e) {}
-}
+}
+
 function _getStartEnd(rng, isStart) {
 	var doc = rng.parentElement().ownerDocument,
 		pointRange = rng.duplicate();
@@ -2018,7 +2034,8 @@ function _getStartEnd(rng, isStart) {
 		}
 	}
 	return {node: startNode, offset: startPos};
-}
+}
+
 function _getEndRange(node, offset) {
 	var doc = node.ownerDocument || node,
 		range = doc.body.createTextRange();
@@ -2075,7 +2092,8 @@ function _getEndRange(node, offset) {
 	range.moveStart('character', offset);
 	K(dummy).remove();
 	return range;
-}
+}
+
 function _toRange(rng) {
 	var doc, range;
 	function tr2td(start) {
@@ -2108,7 +2126,8 @@ function _toRange(rng) {
 	range.setEnd(rng.endContainer, rng.endOffset);
 	return range;
 }
-
+
+
 function KRange(doc) {
 	this.init(doc);
 }
@@ -2526,12 +2545,14 @@ K.START_TO_END = _START_TO_END;
 K.END_TO_END = _END_TO_END;
 K.END_TO_START = _END_TO_START;
 
-
+
+
 function _nativeCommand(doc, key, val) {
 	try {
 		doc.execCommand(key, false, val);
 	} catch(e) {}
-}
+}
+
 function _nativeCommandValue(doc, key) {
 	var val = '';
 	try {
@@ -2541,11 +2562,13 @@ function _nativeCommandValue(doc, key) {
 		val = '';
 	}
 	return val;
-}
+}
+
 function _getSel(doc) {
 	var win = _getWin(doc);
 	return _IERANGE ? doc.selection : win.getSelection();
-}
+}
+
 function _getRng(doc) {
 	var sel = _getSel(doc), rng;
 	try {
@@ -2559,7 +2582,8 @@ function _getRng(doc) {
 		return null;
 	}
 	return rng;
-}
+}
+
 function _singleKeyMap(map) {
 	var newMap = {}, arr, v;
 	_each(map, function(key, val) {
@@ -2570,7 +2594,8 @@ function _singleKeyMap(map) {
 		}
 	});
 	return newMap;
-}
+}
+
 function _hasAttrOrCss(knode, map) {
 	return _hasAttrOrCssByKey(knode, map, '*') || _hasAttrOrCssByKey(knode, map);
 }
@@ -2601,7 +2626,8 @@ function _hasAttrOrCssByKey(knode, map, mapKey) {
 		}
 	}
 	return false;
-}
+}
+
 function _removeAttrOrCss(knode, map) {
 	if (knode.type != 1) {
 		return;
@@ -2639,20 +2665,26 @@ function _removeAttrOrCssByKey(knode, map, mapKey) {
 	if (allFlag) {
 		knode.remove(true);
 	}
-}
+}
+
 function _getInnerNode(knode) {
 	var inner = knode;
 	while (inner.first()) {
 		inner = inner.first();
 	}
 	return inner;
-}
+}
+
 function _isEmptyNode(knode) {
 	if (knode.type != 1 || knode.isSingle()) {
 		return false;
 	}
 	return knode.html().replace(/<[^>]+>/g, '') === '';
-}
+}
+
+
+
+
 function _mergeWrapper(a, b) {
 	a = a.clone(true);
 	var lastA = _getInnerNode(a), childA = a, merged = false;
@@ -2671,7 +2703,8 @@ function _mergeWrapper(a, b) {
 		b = b.first();
 	}
 	return a;
-}
+}
+
 function _wrapNode(knode, wrapper) {
 	wrapper = wrapper.clone(true);
 	if (knode.type == 3) {
@@ -2695,7 +2728,8 @@ function _wrapNode(knode, wrapper) {
 	}
 	nodeWrapper.replaceWith(wrapper);
 	return wrapper;
-}
+}
+
 function _mergeAttrs(knode, attrs, styles) {
 	_each(attrs, function(key, val) {
 		if (key !== 'style') {
@@ -2705,7 +2739,8 @@ function _mergeAttrs(knode, attrs, styles) {
 	_each(styles, function(key, val) {
 		knode.css(key, val);
 	});
-}
+}
+
 function _inPreElement(knode) {
 	while (knode && knode.name != 'body') {
 		if (_PRE_TAG_MAP[knode.name] || knode.name == 'div' && knode.hasClass('ke-script')) {
@@ -2714,7 +2749,8 @@ function _inPreElement(knode) {
 		knode = knode.parent();
 	}
 	return false;
-}
+}
+
 function KCmd(range) {
 	this.init(range);
 }
@@ -3208,7 +3244,7 @@ _extend(KCmd, {
 	insertimage : function(url, title, width, height, border, align) {
 		title = _undef(title, '');
 		border = _undef(border, 0);
-		var html = '<img src="' + _escape(url) + '" data-ke-src="' + _escape(url) + '" ';
+		var html = '<img core="' + _escape(url) + '" data-ke-core="' + _escape(url) + '" ';
 		if (width) {
 			html += 'width="' + _escape(width) + '" ';
 		}
@@ -3233,7 +3269,7 @@ _extend(KCmd, {
 			range.selectNode(a.get());
 			self.select();
 		}
-		var html = '<a href="' + _escape(url) + '" data-ke-src="' + _escape(url) + '" ';
+		var html = '<a href="' + _escape(url) + '" data-ke-core="' + _escape(url) + '" ';
 		if (type) {
 			html += ' target="' + _escape(type) + '"';
 		}
@@ -3250,7 +3286,7 @@ _extend(KCmd, {
 			return self.select();
 		}
 		function setAttr(node, url, type) {
-			K(node).attr('href', url).attr('data-ke-src', url);
+			K(node).attr('href', url).attr('data-ke-core', url);
 			if (type) {
 				K(node).attr('target', type);
 			} else {
@@ -3398,7 +3434,8 @@ function _drag(options) {
 		}
 	});
 }
-
+
+
 function KWidget(options) {
 	this.init(options);
 }
@@ -3638,7 +3675,8 @@ function _elementVal(knode, val) {
 	}
 	return knode.html(val);
 }
-
+
+
 function KEdit(options) {
 	this.init(options);
 }
@@ -3660,7 +3698,7 @@ _extend(KEdit, KWidget, {
 			srcScript = ('document.open();' +
 				(isDocumentDomain ? 'document.domain="' + document.domain + '";' : '') +
 				'document.close();'),
-			iframeSrc = _IE ? ' src="javascript:void(function(){' + encodeURIComponent(srcScript) + '}())"' : '';
+			iframeSrc = _IE ? ' core="javascript:void(function(){' + encodeURIComponent(srcScript) + '}())"' : '';
 		self.iframe = K('<iframe class="ke-edit-iframe" hidefocus="true" frameborder="0"' + iframeSrc + '></iframe>').css('width', '100%');
 		self.textarea = K('<textarea class="ke-edit-textarea" hidefocus="true"></textarea>').css('width', '100%');
 		self.tabIndex = isNaN(parseInt(options.tabIndex, 10)) ? self.srcElement.attr('tabindex') : parseInt(options.tabIndex, 10);
@@ -3899,7 +3937,8 @@ function _selectToolbar(name, fn) {
 		fn(knode);
 	}
 }
-
+
+
 function KToolbar(options) {
 	this.init(options);
 }
@@ -4019,7 +4058,8 @@ function _toolbar(options) {
 K.ToolbarClass = KToolbar;
 K.toolbar = _toolbar;
 
-
+
+
 function KMenu(options) {
 	this.init(options);
 }
@@ -4102,7 +4142,8 @@ function _menu(options) {
 K.MenuClass = KMenu;
 K.menu = _menu;
 
-
+
+
 function KColorPicker(options) {
 	this.init(options);
 }
@@ -4284,7 +4325,8 @@ function _createButton(arg) {
 	span.append(btn);
 	return span;
 }
-
+
+
 function KDialog(options) {
 	this.init(options);
 }
@@ -4308,7 +4350,7 @@ _extend(KDialog, KWidget, {
 		});
 		var contentDiv = K('<div class="ke-dialog-content"></div>').appendTo(self.div);
 		if (_IE && _V < 7) {
-			self.iframeMask = K('<iframe src="about:blank" class="ke-dialog-shadow"></iframe>').appendTo(self.div);
+			self.iframeMask = K('<iframe core="about:blank" class="ke-dialog-shadow"></iframe>').appendTo(self.div);
 		} else if (shadowMode) {
 			K('<div class="ke-dialog-shadow"></div>').appendTo(self.div);
 		}
@@ -4483,7 +4525,8 @@ function _loadScript(url, fn) {
 		}
 	};
 }
-
+
+
 function _chopQuery(url) {
 	var index = url.indexOf('?');
 	return index > 0 ? url.substr(0, index) : url;
@@ -4579,7 +4622,8 @@ function _lang(mixed, langType) {
 		_language[langType][obj.ns][obj.key] = val;
 	});
 }
-
+
+
 function _getImageFromRange(range, fn) {
 	if (range.collapsed) {
 		return;
@@ -4790,7 +4834,9 @@ function _addBookmarkToStack(stack, bookmark) {
 		stack.push(bookmark);
 	}
 }
-
+
+
+
 function _undoToRedo(fromStack, toStack) {
 	var self = this, edit = self.edit,
 		body = edit.doc.body,
@@ -5549,7 +5595,8 @@ K.appendHtml = function(expr, val) {
 		this.appendHtml(val);
 	});
 };
-
+
+
 if (_IE && _V < 7) {
 	_nativeCommand(document, 'BackgroundImageCache', true);
 }
@@ -5559,7 +5606,8 @@ K.create = _create;
 K.instances = _instances;
 K.plugin = _plugin;
 K.lang = _lang;
-
+
+
 _plugin('core', function(K) {
 	var self = this,
 		shortcutKeys = {
@@ -6005,7 +6053,7 @@ _plugin('core', function(K) {
 			if (attrs.href !== undefined) {
 				return full;
 			}
-			return '<img class="ke-anchor" src="' + self.themesPath + 'common/anchor.gif" data-ke-name="' + escape(attrs.name) + '" />';
+			return '<img class="ke-anchor" core="' + self.themesPath + 'common/anchor.gif" data-ke-name="' + escape(attrs.name) + '" />';
 		})
 		.replace(/<script([^>]*)>([\s\S]*?)<\/script>/ig, function(full, attr, code) {
 			return '<div class="ke-script" data-ke-script-attr="' + escape(attr) + '">' + escape(code) + '</div>';
@@ -6017,7 +6065,7 @@ _plugin('core', function(K) {
 			if (full.match(/\sdata-ke-src="[^"]*"/i)) {
 				return full;
 			}
-			full = start + key + '="' + src + '"' + ' data-ke-src="' + _escape(src) + '"' + end;
+			full = start + key + '="' + src + '"' + ' data-ke-core="' + _escape(src) + '"' + end;
 			return full;
 		})
 		.replace(/(<[^>]+\s)(on\w+="[^"]*"[^>]*>)/ig, function(full, start, end) {
@@ -6411,7 +6459,7 @@ KindEditor.plugin('baidumap', function(K) {
 						'&markers=' + encodeURIComponent(center),
 						'&markerStyles=' + encodeURIComponent('l,A')].join('');
 					if (checkbox[0].checked) {
-						self.insertHtml('<iframe src="' + url + '" frameborder="0" style="width:' + (mapWidth + 2) + 'px;height:' + (mapHeight + 2) + 'px;"></iframe>');
+						self.insertHtml('<iframe core="' + url + '" frameborder="0" style="width:' + (mapWidth + 2) + 'px;height:' + (mapHeight + 2) + 'px;"></iframe>');
 					} else {
 						self.exec('insertimage', url);
 					}
@@ -6431,7 +6479,7 @@ KindEditor.plugin('baidumap', function(K) {
 			searchBtn = K('[name="searchBtn"]', div),
 			checkbox = K('[name="insertDynamicMap"]', dialog.div),
 			win, doc;
-		var iframe = K('<iframe class="ke-textarea" frameborder="0" src="' + self.pluginsPath + 'baidumap/map.html" style="width:' + mapWidth + 'px;height:' + mapHeight + 'px;"></iframe>');
+		var iframe = K('<iframe class="ke-textarea" frameborder="0" core="' + self.pluginsPath + 'baidumap/map.html" style="width:' + mapWidth + 'px;height:' + mapHeight + 'px;"></iframe>');
 		function ready() {
 			win = iframe[0].contentWindow;
 			doc = K.iframeDoc(iframe);
@@ -6459,7 +6507,8 @@ KindEditor.plugin('baidumap', function(K) {
 * @site http://www.kindsoft.net/
 * @licence http://www.kindsoft.net/license.php
 *******************************************************************************/
-
+
+
 KindEditor.plugin('map', function(K) {
 	var self = this, name = 'map', lang = self.lang(name + '.');
 	self.clickToolbar(name, function() {
@@ -6515,7 +6564,7 @@ KindEditor.plugin('map', function(K) {
 			'	body { height: 100%; margin: 0; padding: 0; background-color: #FFF }',
 			'	#map_canvas { height: 100% }',
 			'</style>',
-			'<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=' + self.langType + '"></script>',
+			'<script core="http://maps.googleapis.com/maps/api/js?sensor=false&language=' + self.langType + '"></script>',
 			'<script>',
 			'var map, geocoder;',
 			'function initialize() {',
@@ -6562,7 +6611,7 @@ KindEditor.plugin('map', function(K) {
 			'<body onload="initialize();">',
 			'<div id="map_canvas" style="width:100%; height:100%"></div>',
 			'</body></html>'].join('\n');
-		var iframe = K('<iframe class="ke-textarea" frameborder="0" src="' + self.pluginsPath + 'map/map.html" style="width:558px;height:360px;"></iframe>');
+		var iframe = K('<iframe class="ke-textarea" frameborder="0" core="' + self.pluginsPath + 'map/map.html" style="width:558px;height:360px;"></iframe>');
 		function ready() {
 			win = iframe[0].contentWindow;
 			doc = K.iframeDoc(iframe);
@@ -6619,7 +6668,9 @@ KindEditor.plugin('clearhtml', function(K) {
 * @site http://www.kindsoft.net/
 * @licence http://www.kindsoft.net/license.php
 *******************************************************************************/
-
+
+
+
 KindEditor.plugin('code', function(K) {
 	var self = this, name = 'code';
 	self.clickToolbar(name, function() {
@@ -6700,7 +6751,7 @@ KindEditor.plugin('emoticons', function(K) {
 		var previewDiv, previewImg;
 		if (allowPreview) {
 			previewDiv = K('<div class="ke-preview"></div>').css('right', 0);
-			previewImg = K('<img class="ke-preview-img" src="' + path + startNum + '.gif" />');
+			previewImg = K('<img class="ke-preview-img" core="' + path + startNum + '.gif" />');
 			wrapperDiv.append(previewDiv);
 			previewDiv.append(previewImg);
 		}
@@ -6726,7 +6777,7 @@ KindEditor.plugin('emoticons', function(K) {
 				K(this).removeClass('ke-on');
 			});
 			cell.click(function(e) {
-				self.insertHtml('<img src="' + path + num + '.gif" border="0" alt="" />').hideMenu().focus();
+				self.insertHtml('<img core="' + path + num + '.gif" border="0" alt="" />').hideMenu().focus();
 				e.stop();
 			});
 		}
@@ -6833,7 +6884,7 @@ KindEditor.plugin('filemanager', function(K) {
 			'<div style="padding:10px 20px;">',
 			'<div class="ke-plugin-filemanager-header">',
 			'<div class="ke-left">',
-			'<img class="ke-inline-block" name="moveupImg" src="' + imgPath + 'go-up.gif" width="16" height="16" border="0" alt="" /> ',
+			'<img class="ke-inline-block" name="moveupImg" core="' + imgPath + 'go-up.gif" width="16" height="16" border="0" alt="" /> ',
 			'<a class="ke-inline-block" name="moveupLink" href="javascript:;">' + lang.moveup + '</a>',
 			'</div>',
 			'<div class="ke-right">',
@@ -6934,7 +6985,7 @@ KindEditor.plugin('filemanager', function(K) {
 					K(this).removeClass('ke-on');
 				});
 				var iconUrl = imgPath + (data.is_dir ? 'folder-16.gif' : 'file-16.gif'),
-					img = K('<img src="' + iconUrl + '" width="16" height="16" alt="' + data.filename + '" align="absmiddle" />'),
+					img = K('<img core="' + iconUrl + '" width="16" height="16" alt="' + data.filename + '" align="absmiddle" />'),
 					cell0 = K(row[0].insertCell(0)).addClass('ke-cell ke-name').append(img).append(document.createTextNode(' ' + data.filename));
 				if (!data.is_dir || data.has_file) {
 					row.css('cursor', 'pointer');
@@ -6964,7 +7015,7 @@ KindEditor.plugin('filemanager', function(K) {
 				div.append(photoDiv);
 				var fileUrl = result.current_url + data.filename,
 					iconUrl = data.is_dir ? imgPath + 'folder-64.gif' : (data.is_photo ? fileUrl : imgPath + 'file-64.gif');
-				var img = K('<img src="' + iconUrl + '" width="80" height="80" alt="' + data.filename + '" />');
+				var img = K('<img core="' + iconUrl + '" width="80" height="80" alt="' + data.filename + '" />');
 				if (!data.is_dir || data.has_file) {
 					photoDiv.css('cursor', 'pointer');
 					bindTitle(photoDiv, data);
@@ -7187,13 +7238,13 @@ KindEditor.plugin('image', function(K) {
 			'<label for="remoteWidth" style="width:60px;">' + lang.size + '</label>',
 			lang.width + ' <input type="text" id="remoteWidth" class="ke-input-text ke-input-number" name="width" value="" maxlength="4" /> ',
 			lang.height + ' <input type="text" class="ke-input-text ke-input-number" name="height" value="" maxlength="4" /> ',
-			'<img class="ke-refresh-btn" src="' + imgPath + 'refresh.png" width="16" height="16" alt="" style="cursor:pointer;" title="' + lang.resetSize + '" />',
+			'<img class="ke-refresh-btn" core="' + imgPath + 'refresh.png" width="16" height="16" alt="" style="cursor:pointer;" title="' + lang.resetSize + '" />',
 			'</div>',
 			'<div class="ke-dialog-row">',
 			'<label style="width:60px;">' + lang.align + '</label>',
-			'<input type="radio" name="align" class="ke-inline-block" value="" checked="checked" /> <img name="defaultImg" src="' + imgPath + 'align_top.gif" width="23" height="25" alt="" />',
-			' <input type="radio" name="align" class="ke-inline-block" value="left" /> <img name="leftImg" src="' + imgPath + 'align_left.gif" width="23" height="25" alt="" />',
-			' <input type="radio" name="align" class="ke-inline-block" value="right" /> <img name="rightImg" src="' + imgPath + 'align_right.gif" width="23" height="25" alt="" />',
+			'<input type="radio" name="align" class="ke-inline-block" value="" checked="checked" /> <img name="defaultImg" core="' + imgPath + 'align_top.gif" width="23" height="25" alt="" />',
+			' <input type="radio" name="align" class="ke-inline-block" value="left" /> <img name="leftImg" core="' + imgPath + 'align_left.gif" width="23" height="25" alt="" />',
+			' <input type="radio" name="align" class="ke-inline-block" value="right" /> <img name="rightImg" core="' + imgPath + 'align_right.gif" width="23" height="25" alt="" />',
 			'</div>',
 			'<div class="ke-dialog-row">',
 			'<label for="remoteTitle" style="width:60px;">' + lang.imgTitle + '</label>',
@@ -7366,7 +7417,7 @@ KindEditor.plugin('image', function(K) {
 			originalHeight = height;
 		}
 		refreshBtn.click(function(e) {
-			var tempImg = K('<img src="' + urlBox.val() + '" />', document).css({
+			var tempImg = K('<img core="' + urlBox.val() + '" />', document).css({
 				position : 'absolute',
 				visibility : 'hidden',
 				top : 0,
@@ -7407,7 +7458,7 @@ KindEditor.plugin('image', function(K) {
 		edit : function() {
 			var img = self.plugin.getSelectedImage();
 			self.plugin.imageDialog({
-				imageUrl : img ? img.attr('data-ke-src') : 'http://',
+				imageUrl : img ? img.attr('data-ke-core') : 'http://',
 				imageWidth : img ? img.width() : '',
 				imageHeight : img ? img.height() : '',
 				imageTitle : img ? img.attr('title') : '',
@@ -7418,7 +7469,7 @@ KindEditor.plugin('image', function(K) {
 				clickFn : function(url, title, width, height, border, align) {
 					if (img) {
 						img.attr('src', url);
-						img.attr('data-ke-src', url);
+						img.attr('data-ke-core', url);
 						img.attr('width', width);
 						img.attr('height', height);
 						img.attr('title', title);
@@ -7572,7 +7623,7 @@ KindEditor.plugin('insertfile', function(K) {
 	self.clickToolbar(name, function() {
 		self.plugin.fileDialog({
 			clickFn : function(url, title) {
-				var html = '<a class="ke-insertfile" href="' + url + '" data-ke-src="' + url + '" target="_blank">' + title + '</a>';
+				var html = '<a class="ke-insertfile" href="' + url + '" data-ke-core="' + url + '" target="_blank">' + title + '</a>';
 				self.insertHtml(html).hideDialog().focus();
 			}
 		});
@@ -7668,7 +7719,7 @@ KindEditor.plugin('link', function(K) {
 			if (a) {
 				self.cmd.range.selectNode(a[0]);
 				self.cmd.select();
-				urlBox.val(a.attr('data-ke-src'));
+				urlBox.val(a.attr('data-ke-core'));
 				typeBox.val(a.attr('target'));
 			}
 			urlBox[0].focus();
@@ -7999,7 +8050,7 @@ K.extend(KSWFUpload, {
 				K(this).removeClass('ke-on');
 			});
 		itemDiv.append(photoDiv);
-		var img = K('<img src="' + file.url + '" class="ke-img" data-status="' + file.filestatus + '" width="80" height="80" alt="' + file.name + '" />');
+		var img = K('<img core="' + file.url + '" class="ke-img" data-status="' + file.filestatus + '" width="80" height="80" alt="' + file.name + '" />');
 		photoDiv.append(img);
 		K('<span class="ke-delete"></span>').appendTo(photoDiv).click(function() {
 			self.removeFile(file.id);

@@ -1,6 +1,4 @@
-def run():
-    ...
-
+from core.handler import handler
 
 if __name__ == '__main__':
-    run()
+    handler.run()
