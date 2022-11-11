@@ -83,3 +83,10 @@ create table up_and_down(
     constraint fk_updown_article foreign key (article_id) references article(id)
 );
 ~~~
+
+~~~python
+# userinfo
+hkw,0224
+jon,123
+~~~
+

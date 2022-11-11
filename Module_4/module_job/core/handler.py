@@ -99,7 +99,7 @@ class Handler:
         page_total_num = article_count / page_article_num
         v1, v2 = divmod(page_total_num, 2)
         if v2 not in (0, 1):
-            page_total_num += 1
+            page_total_num = int(page_total_num) + 1
 
         while True:
             print(f'共有{article_count}篇文章，{page_total_num}页'.center(50, '-'))
@@ -124,13 +124,18 @@ class Handler:
                 self.NAVIGATION.append('文章详情')
                 print(' > '.join(self.NAVIGATION).center(50, '-'))
 
-                choice = input('请输入看查看文章的ID:>>>').strip()
+                choice = input('请输入看查看文章的ID(全文):>>>').strip()
                 if choice.upper() == 'Q':
                     break
                 if not choice or not choice.isdecimal():
                     print('序号输入不合法!')
                     continue
-                choice = int(choice) - 1
+                choice = int(choice)
+                if choice < 1 or choice > article_count:
+                    print('页码超出!')
+                    self.NAVIGATION.pop(-1)
+                    continue
+                choice -= 1
                 try:
                     article = article_list[choice]
                 except IndexError as e:
@@ -150,20 +155,59 @@ class Handler:
         article_deatil = db_common.show_article_detail(article_id)
         print(article_deatil)
 
-        def add_comment():
-            ...
+        user_id = self.LOGIN_USER_DICT.id
+
+        def publish_comment():
+            content = validate_input('请输入评论内容:>>>')
+            comment_time = datetime.now()
+            result = db_common.publish_comment(user_id, article_id, content, comment_time)
+            if result:
+                print('评论成功')
+                return
+            print('评论失败')
 
         def add_up_num():
-            ...
+            result = db_common.add_up_num(user_id, article_id)
+            if result:
+                print('点赞成功!')
+                return
+            print('点赞失败!')
 
         def add_down_num():
-            ...
+            result = db_common.add_down_num(user_id, article_id)
+            if result:
+                print('点踩成功!')
+                return
+            print('点踩失败!')
 
         func_dict = {
-            '1': TextMethod('发表评论', self.wrapper(add_comment)),
+            '1': TextMethod('发表评论', self.wrapper(publish_comment)),
             '2': TextMethod('点赞', self.wrapper(add_up_num)),
             '3': TextMethod('点踩', self.wrapper_login(add_down_num)),
         }
+        while True:
+            print(' > '.join(self.NAVIGATION).center(50, '-'))
+            for num, cls in func_dict.items():
+                print(num, cls.text)
+
+            choice = input('请输入序号:>>>').strip()
+            if choice.upper() == 'Q':
+                break
+            if not choice or not choice.isdecimal():
+                print('非法输入!')
+                continue
+            if choice not in func_dict.keys():
+                print('输入不正确!')
+                continue
+            content = func_dict.get(choice)
+            self.NAVIGATION.append(content.text)
+            content.method()
+            self.NAVIGATION.pop(-1)
+
+    def logout(self):
+        self.LOGIN_USER_DICT.clear()
+        print('注销成功!')
+        return 'logout'
 
     def run(self):
         self.NAVIGATION.append('首页')
@@ -172,8 +216,8 @@ class Handler:
             '2': TextMethod('登录', self.wrapper(self.login)),
             '3': TextMethod('发布文章', self.wrapper_login(self.publish_article)),
             '4': TextMethod('查看文章列表', self.wrapper_login(self.look_article_list)),
+            '5': TextMethod('注销', self.wrapper_login(self.logout)),
         }
-
         while True:
             print(' > '.join(self.NAVIGATION).center(50, '-'))
             for num, cls in mapping_dict.items():
@@ -181,13 +225,9 @@ class Handler:
 
             choice = input('请输入序号:>>>').strip()
             if choice.upper() == 'Q':
-                print('退出!')
                 break
-            if not choice:
-                print('请输入非空序号!')
-                continue
-            if not choice.isdecimal():
-                print('请输入数字序号!')
+            if not choice or not choice.isdecimal():
+                print('非法输入!')
                 continue
             if choice not in mapping_dict.keys():
                 print('输入不正确!')

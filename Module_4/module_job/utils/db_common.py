@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from utils.db import Connect
 from utils.common import enc_passwrod
 
@@ -13,7 +15,8 @@ def register(*args, **kwargs):
 def login(*args, **kwargs):
     kwargs['password'] = enc_passwrod(kwargs['password'])
     with Connect() as conn:
-        sql = 'select id, username, password from userinfo where username=%(username)s and password=%(password)s;'
+        sql = 'select id, username, password from userinfo ' \
+              'where username=%(username)s and password=%(password)s;'
         return conn.fetch_one(sql, **kwargs)
 
 
@@ -58,3 +61,39 @@ def show_article_detail(article_id):
         comment_list = conn.fetch_all(sql, article_id)
         detail_dict['comment_list'] = comment_list
         return detail_dict
+
+
+def publish_comment(user_id, article_id, content, comment_time):
+    with Connect() as conn:
+        sql = 'update article set comment_num=comment_num+1 where id=%s;'
+        conn.exec(sql, article_id)
+        sql = 'insert into comment (content,comment_time,user_id,article_id) ' \
+              'values (%s,%s,%s,%s);'
+        return conn.exec(sql, content, comment_time, user_id, article_id)
+
+
+def add_up_num(user_id, article_id):
+    with Connect() as conn:
+        # 查询是否已经点赞
+        sql = 'select id from up_and_down where user_id=%s and article_id=%s and up_num=1;'
+        is_up = conn.fetch_one(sql, user_id, article_id)
+        if is_up:
+            print('请勿重复点赞!')
+            return
+
+        sql = 'insert into up_and_down (user_id,article_id,up_num,ctime) ' \
+              'values (%s,%s,%s,%s);'
+        return conn.exec(sql, user_id, article_id, 1, datetime.now())
+
+
+def add_down_num(user_id, article_id):
+    with Connect() as conn:
+        sql = 'select id from up_and_down where user_id=%s and article_id=%s and down_num=1;'
+        is_up = conn.fetch_one(sql, user_id, article_id)
+        if is_up:
+            print('请勿重复点踩!')
+            return
+
+        sql = 'insert into up_and_down (user_id,article_id,down_num,ctime) ' \
+              'values (%s,%s,%s,%s);'
+        return conn.exec(sql, user_id, article_id, 1, datetime.now())

@@ -24,7 +24,7 @@ class Connect:
 
     def exec(self, sql, *args, **kwargs):
         params = args or kwargs
-        print(params)
+        # print(params)
         row = self.cursor.execute(sql, params)
         self.conn.commit()
         return row

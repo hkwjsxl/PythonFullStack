@@ -9,11 +9,18 @@ class TextMethod:
 
 class UserDict:
     def __init__(self, ):
+        self.id = None
         self.username = None
+        self.nickname = None
+        self.phone = None
+        self.email = None
 
     def set_info(self, user_dict):
         for k, v in user_dict.items():
             setattr(self, k, v)
+
+    def clear(self):
+        self.__init__()
 
 
 def enc_passwrod(pwd):
