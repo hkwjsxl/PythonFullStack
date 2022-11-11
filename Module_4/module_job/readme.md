@@ -18,7 +18,7 @@
 userinfo
     username,password,nickname,phone,email,
 article
-    title,content,article_time,read_num,comment_num,up_num,down_num
+    title,content,article_time,read_num,comment_num,up_num,down_num,user_id
 comment
     user_id,article_id,content,comment_time
 up_and_down

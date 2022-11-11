@@ -1,8 +1,8 @@
 from datetime import datetime
 from functools import wraps
 
-from utils.common import TextMethod, UserDict
 from utils import db_common
+from utils.common import TextMethod, UserDict
 from utils.validator import validate_input, validate_email, validate_phone
 
 
@@ -71,14 +71,99 @@ class Handler:
             print('用户名或密码错误!'.center(50, '-'))
 
     def publish_article(self):
-
-        ...
+        while True:
+            title = validate_input('请输入文章标题:>>>')
+            if title.upper() == 'Q':
+                break
+            content = validate_input('请输入文章内容:>>>')
+            article_time = datetime.now()
+            result = db_common.publish_article(
+                self.LOGIN_USER_DICT.username,
+                title=title,
+                content=content,
+                article_time=article_time
+            )
+            if result:
+                print(f'{title}***发布成功!'.center(50, '-'))
+                break
+            print('发布失败!'.center(50, '*'))
 
     def look_article_list(self):
-        ...
+        article_list = db_common.look_article_list()
+        if not article_list:
+            print('暂时没有文章!'.center(50, '*'))
+            return
 
-    def article_detail(self):
-        ...
+        article_count = len(article_list)
+        page_article_num = 2
+        page_total_num = article_count / page_article_num
+        v1, v2 = divmod(page_total_num, 2)
+        if v2 not in (0, 1):
+            page_total_num += 1
+
+        while True:
+            print(f'共有{article_count}篇文章，{page_total_num}页'.center(50, '-'))
+            page_num = input('请输入要查看的页数(每页2篇):>>>').strip()
+            if page_num.upper() == 'Q':
+                break
+            if not page_num or not page_num.isdecimal():
+                print('页码输入不正确!')
+                continue
+            page_num = int(page_num)
+            if page_num < 1 or page_num > page_total_num:
+                print('页码超出!')
+                continue
+
+            start_num = page_article_num * page_num - 1
+            end_num = page_article_num * page_num
+            part_article_list = article_list[start_num - 1:end_num]
+            for article_dict in part_article_list:
+                print(article_dict)
+
+            while True:
+                self.NAVIGATION.append('文章详情')
+                print(' > '.join(self.NAVIGATION).center(50, '-'))
+
+                choice = input('请输入看查看文章的ID:>>>').strip()
+                if choice.upper() == 'Q':
+                    break
+                if not choice or not choice.isdecimal():
+                    print('序号输入不合法!')
+                    continue
+                choice = int(choice) - 1
+                try:
+                    article = article_list[choice]
+                except IndexError as e:
+                    print('序号超出!')
+                    self.NAVIGATION.pop(-1)
+                    continue
+
+                self.wrapper_login(self.article_detail(article))
+                self.NAVIGATION.pop(-1)
+                break
+
+    def article_detail(self, article):
+        article_id = article.get('id')
+        # 阅读数量+1
+        db_common.add_read_num(article_id)
+        # 展示文章详情
+        article_deatil = db_common.show_article_detail(article_id)
+        print(article_deatil)
+
+        def add_comment():
+            ...
+
+        def add_up_num():
+            ...
+
+        def add_down_num():
+            ...
+
+        func_dict = {
+            '1': TextMethod('发表评论', self.wrapper(add_comment)),
+            '2': TextMethod('点赞', self.wrapper(add_up_num)),
+            '3': TextMethod('点踩', self.wrapper_login(add_down_num)),
+        }
 
     def run(self):
         self.NAVIGATION.append('首页')
@@ -87,7 +172,6 @@ class Handler:
             '2': TextMethod('登录', self.wrapper(self.login)),
             '3': TextMethod('发布文章', self.wrapper_login(self.publish_article)),
             '4': TextMethod('查看文章列表', self.wrapper_login(self.look_article_list)),
-            '5': TextMethod('文章详情', self.wrapper_login(self.article_detail)),
         }
 
         while True:
