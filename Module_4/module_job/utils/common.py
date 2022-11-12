@@ -23,7 +23,7 @@ class UserDict:
         self.__init__()
 
 
-def enc_passwrod(pwd):
+def enc_password(pwd):
     md5_obj = md5()
     md5_obj.update('除却君身三层雪，天下谁人配白衣。'.encode('utf-8'))
     md5_obj.update(pwd.encode('utf-8'))

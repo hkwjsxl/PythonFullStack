@@ -1,11 +1,11 @@
 from datetime import datetime
 
 from utils.db import Connect
-from utils.common import enc_passwrod
+from utils.common import enc_password
 
 
 def register(*args, **kwargs):
-    kwargs['password'] = enc_passwrod(kwargs['password'])
+    kwargs['password'] = enc_password(kwargs['password'])
     with Connect() as conn:
         sql = 'insert into userinfo(username,nickname,password,phone,email,create_time) ' \
               'values(%(username)s,%(nickname)s,%(password)s,%(phone)s,%(email)s,%(create_time)s);'
@@ -13,7 +13,7 @@ def register(*args, **kwargs):
 
 
 def login(*args, **kwargs):
-    kwargs['password'] = enc_passwrod(kwargs['password'])
+    kwargs['password'] = enc_password(kwargs['password'])
     with Connect() as conn:
         sql = 'select id, username, password from userinfo ' \
               'where username=%(username)s and password=%(password)s;'
