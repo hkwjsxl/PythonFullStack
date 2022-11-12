@@ -2,3 +2,17 @@
 git config --global http.postBuffer 524288000
 # 查看设置值
 git config --list
+
+# 生成requirements.txt
+# 方法1
+pip freeze > requirements.txt
+# 方法2,在当前目录使用生成(推荐)
+pip install pipreqs
+pipreqs ./ --encoding=utf8 --force
+    --encoding=utf8 ：为使用utf8编码
+    --force ：强制执行，当 生成目录下的requirements.txt存在时覆盖
+    . /: 在哪个文件生成requirements.txt 文件
+# 安装包
+pip install -r requirements.txt
+
+

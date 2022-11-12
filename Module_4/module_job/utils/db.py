@@ -22,11 +22,12 @@ class Connect:
         self.cursor.close()
         self.conn.close()
 
-    def exec(self, sql, *args, **kwargs):
+    def exec(self, sql, is_commit=True, *args, **kwargs):
         params = args or kwargs
         # print(params)
         row = self.cursor.execute(sql, params)
-        self.conn.commit()
+        if is_commit:
+            self.conn.commit()
         return row
 
     def fetch_one(self, sql, *args, **kwargs):
