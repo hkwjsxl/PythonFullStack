@@ -118,6 +118,7 @@
 
    ```sql
    select gender,count(1) from student group by gender;
+   
    ```
 
 6. 查询同名同姓学生名单，并统计同名人数。
@@ -356,7 +357,6 @@
     	class.cid
     ORDER BY
     	av desc
-    	
     ```
 
 22. 查询学过 “波多” 老师课的同学的学号、姓名。
@@ -735,7 +735,7 @@
     - 学生ID为：没上过课程ID为 “2” 课程的学生的 学号；
     - 课程ID为：2
     - 成绩为：80
-    
+
     ```sql
     -- 上过
     select student_id from score where course_id =2;
@@ -759,7 +759,7 @@
     WHERE
     	sid NOT IN ( SELECT student_id FROM score WHERE course_id = 2 );
     ```
-    
+
     ```sql
     INSERT INTO sc ( student_id, course_id, num ) SELECT
     sid,
@@ -770,12 +770,12 @@
     WHERE
     	sid NOT IN ( SELECT student_id FROM score WHERE course_id = 2 )
     ```
-    
+
 40. 向 sc 表中插入一些记录，这些记录要求符合以下条件：
     - 学生ID为：没上过课程ID为 “2” 课程的学生的 学号。
     - 课程ID为：2。
     - 成绩为：课程ID为3的最高分。
-    
+
     ```sql
     SELECT
     sid,
@@ -786,9 +786,9 @@
     WHERE
     	sid NOT IN ( SELECT student_id FROM score WHERE course_id = 2 );
     ```
+
     
-    
-    
+
     ```sql
     INSERT INTO sc ( student_id, course_id, num ) SELECT
     sid,
