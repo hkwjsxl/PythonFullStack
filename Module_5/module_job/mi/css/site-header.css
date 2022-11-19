@@ -1,0 +1,73 @@
+/*site-header*/
+.site-header .header-logo {
+    width: 234px;
+    float: left;
+    margin-top: 20px;
+}
+
+.site-header .header-logo .logo {
+    float: left;
+    width: 56px;
+    height: 56px;
+    background: url("//s02.mifile.cn/assets/static/image/logo-mi2.png") no-repeat;
+    background-size: 56px;
+}
+
+.site-header .header-nav {
+    width: 850px;
+    float: left;
+}
+
+.site-header .header-nav .nav-list {
+    list-style: none;
+    float: left;
+    height: 88px;
+    padding: 12px 0 0 30px;
+    font-size: 16px;
+}
+
+.site-header .header-nav .nav-list .nav-item {
+    float: left;
+}
+
+.site-header .header-nav .nav-item a {
+    display: block;
+    padding: 22px 10px 38px;
+    color: #333;
+}
+
+.site-header .header-nav .header-search {
+    float: right;
+    width: 296px;
+    margin-top: 25px;
+}
+
+.site-header .header-nav .header-search .search-form {
+    position: relative;
+    display: block;
+    width: 296px;
+    height: 50px;
+}
+
+.site-header .header-nav .header-search input {
+    position: absolute;
+    top: 0;
+    border: 1px solid #e0e0e0;
+}
+
+.site-header .header-nav .header-search .search-form .search-text {
+    left: 0;
+    width: 223px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+}
+
+.site-header .header-nav .header-search .search-form .search-btn {
+    right: 0;
+    width: 52px;
+    height: 52px;
+    line-height: 52px;
+    font-size: 20px;
+    background: #fff;
+}

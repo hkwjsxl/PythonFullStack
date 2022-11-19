@@ -1,0 +1,98 @@
+/*home*/
+.home .container {
+    width: 1226px;
+    margin: 0 auto;
+    height: 460px;
+    background-color: lightblue;
+}
+
+.home-hero .cate {
+    float: left;
+    width: 20%;
+    height: 460px;
+    background-color: orange;
+}
+
+.home-hero .cate ul li {
+    display: block;
+    height: 50px;
+    padding: 20px 30px;
+}
+
+.home-hero .cate ul li a {
+    display: block;
+    color: lightyellow;
+}
+
+.home-hero .cate ul li span {
+    float: right;
+}
+
+.home-hero .lunbo {
+    float: left;
+    width: 80%;
+    height: 460px;
+    position: relative;
+    background-color: lightskyblue;
+}
+
+.home-hero .lunbo .btn .left_btn {
+    position: absolute;
+    left: 0;
+    top: 50%;
+}
+
+.home-hero .lunbo .btn .right_btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+}
+
+.home-hero .lunbo .btn div {
+    width: 40px;
+    height: 60px;
+    color: white;
+    text-align: center;
+    line-height: 60px;
+    font-size: 20px;
+    margin-top: -30px;
+    background-color: #616161;
+}
+
+.home-hero .lunbo .imgs a {
+    display: block;
+    width: 100%;
+    height: 460px;
+    text-align: center;
+    line-height: 460px;
+    background-color: lightblue;
+}
+
+.hero-sub {
+    margin: 10px 0;
+}
+
+.hero-sub .home-channel-list {
+    float: left;
+    width: 20%;
+    height: 170px;
+    background-color: #616161;
+}
+
+.hero-sub .J_homePromoList {
+    list-style: none;
+}
+
+.hero-sub .J_homePromoList li {
+    float: left;
+    width: 316px;
+    height: 170px;
+    text-align: center;
+    line-height: 170px;
+    margin-left: 10px;
+    background-color: lightsteelblue;
+}
+
+.hero-sub .J_homePromoList li a {
+    display: block;
+}

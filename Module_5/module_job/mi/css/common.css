@@ -1,0 +1,38 @@
+/*公用*/
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    min-width: 1226px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FF6900 !important;;
+}
+
+ul {
+    list-style: none;
+}
+
+.clearfix:after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+.container {
+    width: 1226px;
+    margin: 0 auto;
+}
+
+
+
