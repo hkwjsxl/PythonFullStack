@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul class="lis">
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+</ul>
+</body>
+<script>
+    // 循环绑定事件
+
+    var eles = document.querySelectorAll(".lis li");
+    // console.log(eles);
+
+    for (var i = 0; i < eles.length; i++) {
+        console.log(eles[i]);
+        eles[i].onclick = function () {
+            // console.log(eles[i].innerHTML);
+            console.log(this.innerHTML);
+
+        }
+    }
+
+    console.log("i:", i);
+</script>
+
+
+</html>
