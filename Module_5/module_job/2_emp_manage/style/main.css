@@ -1,0 +1,50 @@
+.main-title {
+    text-align: center;
+}
+
+.box {
+    width: 80%;
+    margin: 0 auto;
+    /*background-color: red;*/
+}
+
+#my-table {
+    margin: 50px auto;
+    border-spacing: 10px;
+}
+
+#my-table caption {
+    caption-side: top;
+    font-size: 16px;
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+#my-table tr {
+    height: 35px;
+    padding: 10px 0;
+    background-color: #dddddd;
+}
+
+#my-table th {
+    width: 180px;
+}
+
+#my-table td {
+    width: 180px;
+    text-align: center;
+}
+
+.add-person {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.add-person .title {
+    font-weight: 700;
+}
+
+.add-person .add-btn {
+    width: 80px;
+    height: 25px;
+}

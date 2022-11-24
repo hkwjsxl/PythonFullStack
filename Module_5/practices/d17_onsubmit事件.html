@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+<form action="" id="i1">
+    用户名：<input type="text">
+    密码： <input type="password">
+    <input type="submit">
+</form>
+
+
+<script>
+
+    var ele = document.getElementById("i1");
+    var user = document.querySelector("#i1 [type=text]")
+    var pwd = document.querySelector("#i1 [type=password]")
+    ele.onsubmit = function (e) {
+        console.log(user.value);
+        console.log(pwd.value);
+
+        return false;  // 终止事件执行
+        // e.preventDefault();  // 阻止元素默认行为
+    }
+
+</script>
+</body>
+</html>
