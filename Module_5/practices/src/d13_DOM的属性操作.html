@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="d1" class="c1 c2" name="hkw">DOM ATTR</div>
+</body>
+<script>
+    let ele = document.querySelector('#d1');
+    ele.onclick = function () {
+        let name_attr = this.getAttribute('name');
+        console.log(name_attr)
+        this.setAttribute('age', 18)
+        console.log(this.getAttribute('age'));
+
+        console.log(this.attributes);
+        console.log(this.attributes.name);
+
+        this.removeAttribute('age');
+        console.log(this.attributes);
+
+        console.log(this.className);
+        console.log(this.classList);
+
+        this.classList.add('c3');
+        console.log(this.className);
+        this.classList.remove('c3');
+        console.log(this.className);
+    }
+</script>
+
+
+</html>

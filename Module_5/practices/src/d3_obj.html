@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 构建对象
+        // var person = new Object();
+        // person.name = 'name';
+        // person.age = 18;
+        // console.log(person);
+        // console.log(person.name)
+        // console.log(person.age)
+        // 构建对象2
+        var person2 = {
+            name: 'jon',
+            age: 20
+        };
+        person2.gender = "男";
+        // console.log(person2)
+        // console.log(person2["name"])
+        // 循环遍历
+        // for (var attr in person2) {
+        //     console.log(attr);
+        // }
+        // 序列化
+        var json_str = JSON.stringify(person2);
+        console.log(json_str);
+        var js_obj = JSON.parse(json_str);
+        console.log(js_obj)
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

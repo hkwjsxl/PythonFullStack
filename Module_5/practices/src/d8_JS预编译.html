@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS预编译</title>
+    <script>
+        var a = 10;
+        console.log(a);
+
+        function foo(a) {
+            console.log("a1", a);
+            var a = 100;
+            console.log(a);
+
+            function a() {
+            }
+
+            console.log(a);
+            var b = function () {
+            };
+            console.log("b1", b);
+
+            function d() {
+            }
+        }
+
+        var c = function () {
+            console.log("匿名函数C");
+        };
+        console.log(c);
+        foo(20);
+
+    </script>
+    <script>
+        console.log("------")
+        var num3 = 10;
+
+        function func3() {
+            console.log(num3);
+            var num3 = 20;
+        }
+
+        func3();
+        console.log(num3);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
