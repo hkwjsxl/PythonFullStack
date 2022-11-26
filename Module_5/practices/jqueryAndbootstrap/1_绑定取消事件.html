@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<p>限制每次一个按钮只能投票3次</p>
+<button id="up">点下赞(<span>10</span>)</button>
+
+<script>
+    let i = 0;
+    $('#up').click(function () {
+        let span_text = $('#up span').text();
+        span_text++;
+        $('#up span').text(span_text++);
+        i++;
+        if (i >= 3) {
+            $('#up').off('click');
+        }
+    })
+</script>
+
+
+</body>
+</html>

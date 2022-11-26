@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tab {
+            width: 800px;
+            height: 300px;
+            /*border: 1px solid rebeccapurple;*/
+            margin: 200px auto;
+        }
+
+        .tab ul {
+            list-style: none;
+        }
+
+        .tab ul li {
+            display: inline-block;
+        }
+
+        .tab_title {
+            background-color: #f7f7f7;
+            border: 1px solid #eee;
+            border-bottom: 1px solid #e4393c;
+        }
+
+        .tab .tab_title li {
+            padding: 10px 25px;
+            font-size: 14px;
+        }
+
+        .tab .tab_title li.current {
+            background-color: #e4393c;
+            color: #fff;
+            cursor: default;
+        }
+
+        .tab_con li.hide {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="tab">
+    <ul class="tab_title">
+        <li class="current">商品介绍</li>
+        <li>规格与包装</li>
+        <li>售后保障</li>
+        <li>商品评论</li>
+    </ul>
+
+    <ul class="tab_con">
+        <li>商品介绍...</li>
+        <li class="hide">规格与包装...</li>
+        <li class="hide">售后保障...</li>
+        <li class="hide">商品评论...</li>
+    </ul>
+</div>
+
+<script>
+    $('.tab_title li').click(function () {
+        $(this).addClass('current').siblings().removeClass('current');
+        let index = $(this).index();
+        $('.tab_con li').eq(index).removeClass('hide').siblings().addClass('hide');
+
+    })
+</script>
+
+</body>
+</html>

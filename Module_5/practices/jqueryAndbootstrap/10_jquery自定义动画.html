@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+    <style>
+        .c1 {
+            width: 250px;
+            height: 250px;
+            background-color: black;
+
+            position: absolute;
+            left: 120px;
+            top: 240px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="c1"></div>
+<p>
+    <button class="animate">动画</button>
+</p>
+
+
+<script>
+    // $(".box").animate(动画最终效果,动画完成的时间,动画完成以后的回调函数)
+    $(".animate").click(function () {
+
+        $(".c1").animate({
+            "border-radius": "50%",
+            "top": 340,
+            "left": 200
+        }, 1000, function () {
+            $(".c1").animate({
+                "border-radius": "0",
+                "top": 240,
+                "left": 120
+            }, 1000, function () {
+                $(".animate").trigger("click")
+            })
+        })
+
+    })
+</script>
+
+
+</body>
+</html>

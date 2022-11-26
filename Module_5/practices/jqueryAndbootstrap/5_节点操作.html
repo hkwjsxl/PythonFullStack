@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+
+</head>
+<body>
+<button class="add_btn">添加节点</button>
+<button class="del_btn">删除节点</button>
+<button class="replace_btn">替换节点</button>
+<div class="c1">
+    <h3>hello JS!</h3>
+    <h3 class="c2">hello world</h3>
+
+</div>
+
+<script>
+    $('.add_btn').click(function () {
+        // $('.c2').append('<img src="https://github.com/HkwJsxl/PythonFullStack/blob/master/API/images/bky_bg.jpg?raw=true">');
+        // $('.c1').append('<img src="https://github.com/HkwJsxl/PythonFullStack/blob/master/API/images/bky_bg.jpg?raw=true">');
+        // let img = $('<img src="https://github.com/HkwJsxl/PythonFullStack/blob/master/API/images/bky_bg.jpg?raw=true">');
+        // img.appendTo($('.c1'));
+
+        // $('.c1').before('<img src="https://github.com/HkwJsxl/PythonFullStack/blob/master/API/images/bky_bg.jpg?raw=true">');
+        // 第一个孩子之前添加
+        $('.c1').prepend('<img src="https://github.com/HkwJsxl/PythonFullStack/blob/master/API/images/bky_bg.jpg?raw=true">');
+
+    })
+    $('.del_btn').click(function () {
+        // 删除
+        // $('.c2').remove();
+        // 清空
+        $('.c2').empty();
+    })
+    $('.replace_btn').click(function () {
+        let img = $('<img src="https://github.com/HkwJsxl/PythonFullStack/blob/master/API/images/bky_bg.jpg?raw=true">');
+        $('.c2').replaceWith(img);
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+    <style>
+        input[type=file] {
+            display: none;
+        }
+
+        .upload {
+            width: 180px;
+            height: 44px;
+            border-radius: 5px;
+            color: #fff;
+            text-align: center;
+            line-height: 44px;
+            background-color: #000000;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<input type="file" name="avatar">
+<button class="upload">上传文件</button>
+
+
+<script>
+    $(".upload").on("click", function () {
+        $("input[type=file]").trigger("click"); // 模拟事件的触发
+    });
+</script>
+
+
+</body>
+</html>

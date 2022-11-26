@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+    <style>
+        input {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="outer">
+    <div class="item">
+        <input type="button" value="+" class="add">
+        <!--<input type="button" value="-" class="reduce">-->
+    </div>
+
+</div>
+
+<script>
+    $('.add').on('click', function () {
+        let clone_self = $(this).clone().val('-').attr('class', 'reduce');
+        $(this).parent().append(clone_self);
+    })
+    $('.item').on('click', '.reduce', function () {
+        $(this).remove();
+    })
+</script>
+
+</body>
+</html>

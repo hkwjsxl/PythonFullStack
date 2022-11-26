@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<button class="select_all">全选</button>
+<button class="cancel">取消</button>
+<button class="reverse">反选</button>
+<hr>
+<table border="1">
+    <tr>
+        <td>选择</td>
+        <td>姓名</td>
+        <td>年龄</td>
+    </tr>
+
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>张三</td>
+        <td>23</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>李四</td>
+        <td>23</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox"></td>
+        <td>王五</td>
+        <td>23</td>
+    </tr>
+</table>
+<script>
+    $('.select_all').click(function () {
+        $(':checkbox').prop('checked', true);
+    })
+    $('.cancel').click(function () {
+        $(':checkbox').prop('checked', false);
+    })
+    $('.reverse').click(function () {
+        $(':checkbox').each(function () {
+            $(this).prop('checked', !$(this).prop('checked'));
+        });
+    })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            background-color: skyblue;
+
+            padding: 5px;
+
+            border: 10px solid gray;
+            margin: 20px;
+
+            position: absolute;
+            left: 200px;
+        }
+
+        .outer {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="outer">
+    <div class="box">
+        box
+    </div>
+</div>
+<script>
+    $('.box').click(function () {
+        // 内容区域
+        console.log($(this).width());
+        console.log($(this).height());
+        // 加上padding
+        console.log($(this).innerWidth());
+        console.log($(this).innerHeight());
+        // 加上border
+        console.log($(this).outerHeight());
+        console.log($(this).outerHeight());
+        // 加上margin
+        console.log($(this).outerHeight(true));
+        console.log($(this).outerHeight(true));
+
+        console.log('--------------------------');
+        // 当前的偏移量（包括margin）left top
+        console.log($(this).offset());
+        // 元素相对父元素的偏移
+        console.log($(this).position());
+        // 素相对滚动条顶部的偏移
+        console.log($(this).scrollTop());
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-1.11.3.min.js"></script>
+    <style>
+        .c1 {
+            width: 250px;
+            height: 250px;
+            background-color: black;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+
+<p>
+    <button class="show01">显示</button>
+    <button class="hide01">隐藏</button>
+</p>
+<p>
+    <button class="show02">显示</button>
+    <button class="hide02">隐藏</button>
+</p>
+<p>
+    <button class="show03">显示</button>
+    <button class="hide03">隐藏</button>
+</p>
+
+<p>
+    <button class="show04">显示</button>
+    <button class="hide04">隐藏</button>
+</p>
+<hr>
+
+<div class="c1"></div>
+
+
+<script>
+    // 自己实现的隐藏与显示
+
+    $(".show01").click(function () {
+        $(".c1").removeClass("hide")
+    });
+    $(".hide01").click(function () {
+        $(".c1").addClass("hide")
+    });
+
+    // (1) show与hide方法
+
+    $(".show02").click(function () {
+
+        $(".c1").show(1000, function () {
+            // alert("显示成功");
+        });
+
+    });
+    $(".hide02").click(function () {
+
+        $(".c1").hide(1000, function () {
+            // alert("隐藏成功");
+        })
+
+    });
+
+    // (2) slideDown与slideUp
+
+    $(".show03").click(function () {
+
+        $(".c1").slideDown(1000, function () {
+            // alert("显示成功")
+        });
+
+    });
+    $(".hide03").click(function () {
+
+        $(".c1").slideUp(1000, function () {
+            // alert("隐藏成功")
+        })
+
+    });
+
+    // (3) fadeIn与fadeOut
+
+    $(".show04").click(function () {
+
+        $(".c1").fadeIn(1000, function () {
+            // alert("显示成功")
+        });
+
+    });
+    $(".hide04").click(function () {
+
+        $(".c1").fadeOut(1000, function () {
+            // alert("隐藏成功")
+        })
+
+    });
+</script>
+
+
+</body>
+</html>
