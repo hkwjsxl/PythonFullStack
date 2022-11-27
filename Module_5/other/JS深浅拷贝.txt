@@ -1,0 +1,29 @@
+基本数据类型：number、string、boolean、null、undefined
+引用数据类型：object、function、array
+
+存储位置的不同
+    基本数据类型:将值存储在栈中,栈中存放的是对应的值
+    引用数据类型:将对应的值存储在堆中,栈中存放的是指向堆内存的地址
+
+基础数据类型 赋值 赋的是真正的值
+引用数据类型 赋值 赋的是 引用地址
+
+深浅拷贝是对引用数据类型来做探讨的
+    浅拷贝（简单来说就是只拷贝第一层）
+    深拷贝（完全独立的双胞胎,彼此之间不会影响）
+
+JS常见的浅拷贝方法
+    1.Object.assign()
+    2.扩展运算符
+    3.Array.concat()
+    4.Array.slice()
+JS常见的深拷贝方法
+    1.JSON.parse(JSON.stringify(待拷贝对象))
+        --- 有弊端（JSON数据类型不能完全的支持JS数据类型，JS一部分转成JSON后无法再转回来，对于JSON语法不支持的属性，序列化后会将其省略）
+        对于JavaScript中的五种原始类型，JSON语法支持数字、字符串、布尔值、null四种，不支持undefined；
+            NaN、Infinity和-Infinity序列化的结果是null；
+            JSON语法不支持函数；
+            除了RegExp、Error对象，JSON语法支持其他所有对象；
+            日期对象序列化的结果是ISO格式的字符串，但JSON.parse()依然保留它们字符串形态，并不会将其还原为日期对象；
+            JSON.stringify()只能序列化对象的可枚举的自有属性；
+    2.jQuery 中的 $.extend (添加true就是深拷贝,不添加就是浅拷贝)
