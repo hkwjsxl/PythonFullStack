@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+<script>
+    var num3 = 10;
+
+    function func3() {
+        console.log(num3);
+        var num3 = 20;
+    }
+
+    func3();
+    console.log(num3);
+</script>
+
+<script>
+    var num3 = 10;
+
+    function func3() {
+        console.log(num3);
+        num3 = 20;
+    }
+
+    func3();
+    console.log(num3);
+</script>
+
+<script>
+    /*
+        undefined
+        10
+        10
+        20
+    */
+</script>
+
+</body>
+</html>

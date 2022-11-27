@@ -1,0 +1,2 @@
+一个完整的JavaScript包含三个部分：ECMAScript（标准语法），DOM以及BOM！
+ECMAScript是JavaScript的标准规范，JavaScritp是ECMAScript的一种实现。
