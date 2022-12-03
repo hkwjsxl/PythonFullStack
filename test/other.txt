@@ -15,4 +15,3 @@ pipreqs ./ --encoding=utf8 --force
 # 安装包
 pip install -r requirements.txt
 
-
