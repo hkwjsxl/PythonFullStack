@@ -15,4 +15,25 @@ pipreqs ./ --encoding=utf8 --force
 # 安装包
 pip install -r requirements.txt
 
-
+# 网页变灰色
+{#html {#}
+{#    filter: grayscale(100%);#}
+{#    -webkit-filter: grayscale(100%);#}
+{#    -moz-filter: grayscale(100%);#}
+{#    -o-filter: grayscale(100%);#}
+{#    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);#}
+{#    -webkit-filter: grayscale(1)#}
+{# } #}
+/*
+filter是滤镜的意思，
+filter:gray的意思就是说给页面加上一个灰度的滤镜，
+所以html里面的所有内容都会变成黑白的了。
+不过这个滤镜对于chrome和safari浏览器是无效的，
+所以下面会有一行-webkit-filter: grayscale(100%);
+这个样式是专属于使用webkit内核的浏览器的，意思和FILTER: gray;
+差不多，只是写法不同罢了。
+*/
+{#html {#}
+{#    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);#}
+{#    -webkit-filter: grayscale(100%);#}
+{# } #}
