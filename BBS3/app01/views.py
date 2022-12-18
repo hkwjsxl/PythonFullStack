@@ -15,7 +15,7 @@ from BBS3.settings import MEDIA_ROOT
 import os
 from uuid import uuid1
 from bs4 import BeautifulSoup
-from utils import Pagination
+from utils.mypage import Pagination
 
 
 def home(request):
