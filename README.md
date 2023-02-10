@@ -16,3 +16,5 @@ Python全栈---Django之前的部分
 
 - Django部分：https://github.com/HkwJsxl/PythonFullStackDjango
 - DRF&VUE部分：https://github.com/HkwJsxl/DrfAndVue
+- Django项目-luffyV1版本后台：https://github.com/HkwJsxl/LuffyAPI
+- Django项目-luffyV1版本前端：https://github.com/HkwJsxl/luffycity
