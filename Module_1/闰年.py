@@ -1,11 +1,12 @@
 while True:
-    num = input('>>>').strip()
-    if not num.isdecimal():
-        print('again')
-        continue
-    break
-num = int(num)
-if num != 0 and (num % 4 == 0 and num % 100 != 0 or num % 100 == 0 and num % 400 == 0):
-    print(f'{num}是闰年')
-else:
-    print(f'{num}是平年')
+    try:
+        year = int(input('请输入年份:').strip())
+        if year % 400 == 0:
+            print('%d年是世纪闰年' % year)
+        elif year % 4 == 0 and year % 100 != 0:
+            print('%d年是普通闰年' % year)
+        else:
+            print('%d年不是闰年' % year)
+    except:
+        print('[ERROR]:输入错误!!!')
+        break
