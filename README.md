@@ -4,6 +4,8 @@ Python全栈---Django之前的部分
 
 博客园通道：https://www.cnblogs.com/hkwJsxl/
 
+面试题总结：https://www.cnblogs.com/hkwJsxl/p/17176331.html
+
 ## 介绍：
 
 - Module_1：Python基础
