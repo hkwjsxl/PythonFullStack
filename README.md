@@ -42,3 +42,4 @@ Python全栈---Django之前的部分
 - Django项目-luffyV1版本后台：https://github.com/HkwJsxl/LuffyAPI
 - Django项目-luffyV1版本前端：https://github.com/HkwJsxl/luffycity
   - 综合练习
+- Django项目-luffyV2版本改版-飞升在线教育平台：https://github.com/HkwJsxl/feisheng
