@@ -32,6 +32,7 @@ Python全栈---Django之前的部分
   - 知识点总结及重点考核题目总结
 - CountPoints：数分相关知识
 - Extension：扩展知识
+- tanke：坦克大战游戏
 
 ## 后续
 
