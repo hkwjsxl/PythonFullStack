@@ -33,6 +33,7 @@ Python全栈---Django之前的部分
 - CountPoints：数分相关知识
 - Extension：扩展知识
 - tanke：坦克大战游戏
+- data_structure_and_algorithms：数据结构和算法
 
 ## 后续
 
