@@ -19,11 +19,33 @@
 可以将输入中的第3个0、第4个0，第5个0都变成1，新数组为[0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]，因此最长连续1的子数组长度为10
 """
 
+"""
+打牌
+
+基本思路：题目提供k次机会把0翻转成1，相当于你手上有k张牌。
+
+右指针right 遍历数组，遇到0就“出牌”，手上的牌就少了。出到负数的时候，就要移动left 前进，遇到0才 “抽牌”，牌又多了
+
+right和left之间的最长区间就是 连续1的最大个数
+"""
+
 
 class Solution:
     def GetMaxConsecutiveOnes(self, arr, k):
-        return
+        left = right = res = 0
+        while right < len(arr):
+            if arr[right] == 0:
+                k -= 1
+            while k < 0:
+                if arr[left] == 0:
+                    k += 1
+                left += 1
+            res = max(res, right - left + 1)
+            right += 1
+        return res
 
 
 ret = Solution().GetMaxConsecutiveOnes([1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0], 2)
+print(ret)
+ret = Solution().GetMaxConsecutiveOnes([0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1],3)
 print(ret)
