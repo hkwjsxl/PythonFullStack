@@ -2,6 +2,7 @@
 队列
 时间限制： 3000MS
 内存限制： 589824KB
+
 题目描述：
 给定一个长度为n的序列a1,a2,…,an，你可以选择删去其中最多n-1个数，得到一个新序列b1,b2,...,bm(1≤m≤n)。
 （只是删去后的序列，不改变原来的相对顺序）
@@ -48,25 +49,59 @@
 1≤n≤100000,1≤ai≤n
 """
 
-# n = eval(input(""))
-# s = input("")
-n = eval("5")
-s = "1 2 3 4 5"
-lst = s.strip().split()
-lst = list(map(int,lst))
-max_value = max(lst)
-if max_value < n:
-    print("-1")
-tmp_list = []
-m = 1
-y=0
-for i in range(n):
-    val = lst[i]
-    if val == m:
-        tmp_list.append(val)
-        m+=1
-    else:
-        y +=1
+"""未使用队列：通过率55%"""
+# # n = eval(input(""))
+# # s = input("")
+# n = eval("5")
+# s = "1 2 3 4 5"
+# lst = s.strip().split()
+# lst = list(map(int,lst))
+# max_value = max(lst)
+# if max_value < n:
+#     print("-1")
+# tmp_list = []
+# m = 1
+# y=0
+# for i in range(n):
+#     val = lst[i]
+#     if val == m:
+#         tmp_list.append(val)
+#         m+=1
+#     else:
+#         y +=1
+#
+# # print(tmp_list)
+# print(y)
 
-# print(tmp_list)
-print(y)
+
+"""队列：未检测通过率"""
+from queue import Queue
+
+q = Queue()
+
+n = eval("5")
+s = "1 4 2 3 5"
+
+# n = eval("3")
+# s = "3 3 2"
+
+# n = eval("5")
+# s = "1 2 3 4 5"
+lst = list(map(int, s.strip().split()))
+for val in lst:
+    q.put(val)
+q_num = 1
+ret_num = 0
+tmp_list = []
+while not q.empty():
+    q_val = q.get()
+    if q_val == q_num:
+        q_num += 1
+        if not tmp_list:
+            tmp_list.append(q_val)
+    else:
+        ret_num += 1
+if not tmp_list:
+    print("-1")
+else:
+    print(ret_num)
