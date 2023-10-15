@@ -32,23 +32,43 @@
 # @param root TreeNode类 
 # @return int整型二维数组
 #
+# 方式一
+# class BM26levelOrder:
+#     def __init__(self):
+#         self.res = []
+#
+#     def levelOrder(self, root: TreeNode) -> List[List[int]]:
+#         self._func(root, 0)
+#         return self.res
+#
+#     def _func(self, root, index):
+#         if not root:
+#             return
+#         if len(self.res) <= index:
+#             self.res.append([root.val])
+#         else:
+#             self.res[index].append(root.val)
+#         index += 1
+#         if root.left:
+#             self._func(root.left, index)
+#         if root.right:
+#             self._func(root.right, index)
+
+# 方式二
 class BM26levelOrder:
-    def __init__(self):
-        self.res = []
-
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        self._func(root, 0)
-        return self.res
-
-    def _func(self, root, index):
         if not root:
-            return
-        if len(self.res) <= index:
-            self.res.append([root.val])
-        else:
-            self.res[index].append(root.val)
-        index += 1
-        if root.left:
-            self._func(root.left, index)
-        if root.right:
-            self._func(root.right, index)
+            return root
+        temp_list = [root]
+        res = []
+        while temp_list:
+            row_list = []
+            for i in range(len(temp_list)):
+                node = temp_list.pop(0)
+                row_list.append(node.val)
+                if node.left:
+                    temp_list.append(node.left)
+                if node.right:
+                    temp_list.append(node.right)
+            res.append(row_list)
+        return res
