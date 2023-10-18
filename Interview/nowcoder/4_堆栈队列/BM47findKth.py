@@ -7,18 +7,33 @@
 # 
 
 
-# nowcoder submit region begin(Prohibit modification and deletion)
 # coding:utf-8
 #
 # 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
 #
-# 
-# @param a int整型一维数组 
-# @param n int整型 
-# @param K int整型 
+#
+# @param a int整型一维数组
+# @param n int整型
+# @param K int整型
 # @return int整型
 #
 class BM47findKth:
-    def findKth(self, a, n, K):
+    def findKth(self, a: List[int], n: int, K: int) -> int:
         """寻找第K大"""
-        return
+        return self._quick_sort(a)[K - 1]
+
+    def _quick_sort(self, lst):
+        if len(lst) <= 1:
+            return lst
+        left_list = []
+        current_list = []
+        right_list = []
+        temp_val = lst[0]
+        for val in lst:
+            if val < temp_val:
+                left_list.append(val)
+            elif val > temp_val:
+                right_list.append(val)
+            else:
+                current_list.append(val)
+        return self._quick_sort(right_list) + current_list + self._quick_sort(left_list)
